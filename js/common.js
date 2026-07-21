@@ -549,10 +549,6 @@ const Obojima = (() => {
             ingredientName.className = "adjust-quantity-ingredient-name";
             ingredientName.textContent = ingredient;
 
-            const quantityLabel = document.createElement("p");
-            quantityLabel.className = "adjust-quantity-label";
-            quantityLabel.textContent = "Quantity";
-
             const controls = document.createElement("div");
             controls.className = "adjust-quantity-controls";
 
@@ -620,7 +616,7 @@ const Obojima = (() => {
             });
 
             actions.append(apply, cancel);
-            modal.append(heading, ingredientName, quantityLabel, controls, removeAll, actions);
+            modal.append(heading, ingredientName, controls, removeAll, actions);
             backdrop.appendChild(modal);
             document.body.appendChild(backdrop);
             refreshCount();

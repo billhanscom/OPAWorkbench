@@ -4383,3 +4383,36 @@ body.high-contrast .inventory-undo-banner-content {
     gap: 4px;
     margin-bottom: 18px;
 }
+
+
+/* Workbench 0.10.4: quantity dialog hierarchy */
+.adjust-quantity-modal h3 {
+    margin: 0 0 12px;
+    color: inherit;
+    font-family: var(--body-font);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.adjust-quantity-ingredient-name {
+    margin: 0 0 18px;
+    color: #577da1;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.adjust-quantity-controls {
+    display: inline-grid;
+    grid-template-columns: 32px 38px 32px;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+}
+
+.adjust-quantity-remove-all {
+    display: block;
+    width: max-content;
+    margin: 0 auto 22px;
+}

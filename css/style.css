@@ -4473,3 +4473,29 @@ body.high-contrast .inventory-undo-banner-content {
     background: var(--blue, #4f7dad);
     color: #fff;
 }
+
+/* Workbench 0.10.7: brew and quantity-dialog visual refinements */
+.adjust-quantity-modal h3 {
+    color: #111111;
+    font-family: var(--body-font);
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.recipe-subcard-heading-row h5,
+.completion-card-heading-row h4 {
+    font-weight: 400;
+}
+
+.brew-recipe-button {
+    border-color: #DCA453;
+    background: #DCA453;
+    color: #ffffff;
+}
+
+.brew-recipe-button:hover,
+.brew-recipe-button:focus-visible {
+    border-color: #c68f40;
+    background: #c68f40;
+    color: #ffffff;
+}

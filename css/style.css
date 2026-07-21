@@ -1,0 +1,4235 @@
+:root {
+    --body-font: "Atkinson Hyperlegible", "rogliano", Arial, sans-serif;
+    --header-font: "sneakers-pro", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    margin: 0;
+    padding: 0;
+    background-color: #65ade8;
+    color: #2d2d2d;
+}
+
+button,
+select,
+input,
+textarea,
+.nav-button {
+    font-family: var(--body-font);
+}
+
+.container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #fffadb;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    font-family: var(--header-font);
+    font-size: 60px;
+    font-weight: 500;
+    font-style: normal;
+    margin-bottom: -10px;
+    color: #DCA453;
+}
+
+h2 {
+    font-family: var(--body-font);
+    font-weight: 400;
+    font-style: normal;    
+    font-size: 20px;
+    margin-bottom: 50px;
+    color: #2d2d2d;
+}
+
+recipes-title {
+    font-family: var(--body-font);
+    font-size: 18px;
+    color: #577da1;
+    font-weight: 400;    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px; /* Ensure some padding to improve visibility */
+}
+
+.recipes-title h2 {
+    font-family: var(--header-font);
+    font-weight: 500;
+    font-style: normal;
+    color: #DCA453;
+}
+
+h3 {
+    font-family: var(--body-font);
+    font-size: 18px;
+    color: #577da1;
+    font-weight: 400;
+    text-align: center;
+    border-bottom: 1px solid #577da1;
+    padding-bottom: 12px;
+    margin-bottom: 30px;
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.ingredient-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.column {
+    width: 32%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ingredient-button {
+    font-family: var(--body-font);
+    font-weight: 400;
+    font-style: normal;
+    background-color: #ede1cd;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 14px;
+    margin: 0;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.1s ease;
+}
+
+.ingredient-button.selected.common {
+    background-color: #c2e3a7; /* Common: light green */
+    color: #333;
+}
+
+.ingredient-button.selected.uncommon {
+    background-color: #fde663; /* Uncommon: yellow */
+    color: #333;
+}
+
+.ingredient-button.selected.rare {
+    background-color: #fd8966; /* Rare: coral */
+    color: #fff;
+}
+
+.button-group {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.button-group button {
+    background-color: #65ade8;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.button-group button:hover {
+    background-color: #005fa3;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.recipe-column {
+    width: 32%;
+}
+
+
+#results h3 {
+    text-align: center;
+}
+
+#results ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#results li {
+    background-color: #ede1cd;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Ruleset toggle button */
+.ruleset-toggle {
+    text-align: center;
+    margin: 20px 0 10px;
+}
+
+.ruleset-button {
+    background-color: #ede1cd;
+    color: #333;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.ruleset-button:hover {
+    background-color: #d8c6ad;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ruleset-button.selected {
+    background-color: #fffadb;
+    color: #ffffff;
+}
+
+
+.site-footer {
+    margin-top: 50px;
+    font-family: var(--body-font);
+    text-align: center;
+    font-size: 11px;
+    color: #777;
+    line-height: 1.4;
+}
+
+.site-footer p {
+    margin: 2px 0;
+}
+
+.site-footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+
+.recipe-summary {
+    width: 100%;
+    flex-basis: 100%;
+    text-align: center;
+    font-family: var(--body-font);
+    font-size: 20px;
+    font-weight: 400;
+    color: #DCA453;
+    margin: 0 0 30px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #DCA453;
+}
+
+
+
+/* Recipe completer page */
+.completer-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 20px 0 30px;
+}
+
+.control-group {
+    width: 32%;
+}
+
+.control-group label {
+    display: block;
+    font-weight: 400;
+    color: #577da1;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.control-group select {
+    width: 100%;
+    font-family: var(--body-font);
+    font-size: 14px;
+    color: #333;
+    background-color: #ede1cd;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 12px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button {
+    display: inline-block;
+    background-color: #DCA453;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.nav-button:hover {
+    background-color: #b8792e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#completer-results {
+    margin-top: 40px;
+}
+
+.completer-intro,
+.completer-empty {
+    text-align: center;
+    font-size: 16px;
+    color: #2d2d2d;
+}
+
+.completion-card {
+    background-color: #fff3c7;
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin: 20px 0;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.completion-card h4 {
+    margin-top: 0;
+    color: #577da1;
+}
+
+.completion-card ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.completion-card .ingredient {
+    display: inline-block;
+    background-color: #ede1cd;
+    padding: 8px 12px;
+    margin: 6px 6px 6px 0;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.completion-card .ingredient.common {
+    background-color: #c2e3a7;
+}
+
+.completion-card .ingredient.uncommon {
+    background-color: #fde663;
+}
+
+.completion-card .ingredient.rare {
+    background-color: #fd8966;
+    color: #fff;
+}
+
+@media (max-width: 800px) {
+    .completer-controls {
+        display: block;
+    }
+
+    .control-group {
+        width: 100%;
+        margin-bottom: 14px;
+    }
+}
+
+
+.completer-bottom-buttons {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.ingredient-source-note {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+/* More compact Recipe Completer results */
+.completer-tally {
+    width: 100%;
+    text-align: center;
+    font-family: var(--body-font);
+    font-size: 17px;
+    font-weight: 400;
+    color: #577da1;
+    margin: -14px 0 8px 0;
+}
+
+#completer-results .completer-intro {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+#completer-results .completion-card {
+    padding: 10px 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+}
+
+.completion-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.completion-card-header h4 {
+    margin: 0;
+    line-height: 1.3;
+}
+
+.completion-meta {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+    white-space: nowrap;
+}
+
+.completion-recipe-list {
+    margin: 8px 0 0 0;
+}
+
+#completer-results .completion-card .ingredient {
+    padding: 5px 8px;
+    margin: 3px 4px 3px 0;
+    font-size: 13px;
+}
+
+@media (max-width: 800px) {
+    .completion-card-header {
+        display: block;
+    }
+
+    .completion-meta {
+        margin-top: 6px;
+        white-space: normal;
+    }
+}
+
+/* Unified ingredient result colors */
+#results li.ingredient.common,
+.completion-card .ingredient.common {
+    background-color: #c2e3a7;
+}
+
+#results li.ingredient.uncommon,
+.completion-card .ingredient.uncommon {
+    background-color: #fde663;
+}
+
+#results li.ingredient.rare,
+.completion-card .ingredient.rare {
+    background-color: #fd8966;
+    color: #fff;
+}
+
+/* Three-column Recipe Finder/Ingredient Finder results */
+.completion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+
+#completer-results .completion-card {
+    margin: 0;
+}
+
+#completer-results .completion-card-header {
+    display: block;
+}
+
+#completer-results .completion-card-header h4 {
+    margin: 0 0 8px 0;
+}
+
+#completer-results .completion-meta {
+    margin: 0 0 8px 0;
+    white-space: normal;
+}
+
+.completion-region-footer {
+    border-top: 1px solid rgba(87, 125, 161, 0.35);
+    color: #577da1;
+    font-size: 12px;
+    font-weight: 400;
+    margin: 8px 0 0 0;
+    padding-top: 8px;
+}
+
+@media (max-width: 800px) {
+    .completion-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #results .recipe-card li.ingredient,
+    #completer-results .completion-card .ingredient,
+    .completion-card .ingredient {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .recipe-card,
+    .completion-card,
+    #completer-results .completion-card {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+}
+
+/* Unified Almanac / Ingredient Finder result cards */
+.recipe-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.recipe-column h3 {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.recipe-card,
+.completion-card,
+#completer-results .completion-card {
+    background-color: #fff3c7;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 0;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
+}
+
+.recipe-card h4,
+.completion-card h4 {
+    margin: 0 0 8px 0;
+    color: #577da1;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.recipe-card ul,
+.completion-card ul,
+.completion-recipe-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#results .recipe-card li.ingredient,
+#completer-results .completion-card .ingredient,
+.completion-card .ingredient {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 7px 9px;
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.25;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.14);
+}
+
+/* Original ingredient result colors */
+#results li.ingredient.common,
+.completion-card .ingredient.common,
+#completer-results .completion-card .ingredient.common {
+    background-color: #c2e3a7;
+    color: #333;
+}
+
+#results li.ingredient.uncommon,
+.completion-card .ingredient.uncommon,
+#completer-results .completion-card .ingredient.uncommon {
+    background-color: #fde663;
+    color: #333;
+}
+
+#results li.ingredient.rare,
+.completion-card .ingredient.rare,
+#completer-results .completion-card .ingredient.rare {
+    background-color: #fd8966;
+    color: #ffffff;
+}
+
+#completer-results .completion-card-header h4 .ingredient {
+    margin-top: 6px;
+}
+
+/* Rename remaining UI language from Recipe Completer to Ingredient Finder in comments/use */
+@media (max-width: 800px) {
+    .recipe-column {
+        width: 100%;
+    }
+}
+
+/* Accessibility helpers */
+.skip-link {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 1000;
+    transform: translateY(-160%);
+    background-color: #111111;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.skip-link:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+/* High-contrast mode */
+.button-group button.contrast-toggle-button {
+    min-width: 56px;
+    font-size: 14px;
+    line-height: 1;
+    padding: 10px 14px;
+    font-weight: 400;
+    background-color: #111111;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.button-group button.contrast-toggle-button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.button-group button:focus-visible,
+.nav-button:focus-visible,
+.ingredient-button:focus-visible,
+.control-group select:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 2px;
+}
+
+body.high-contrast {
+    background-color: #111111;
+    color: #111111;
+}
+
+body.high-contrast .container {
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px #000000;
+}
+
+body.high-contrast h1 {
+    color: #8a4b00;
+}
+
+body.high-contrast h2,
+body.high-contrast .completer-intro,
+body.high-contrast .completer-empty {
+    color: #111111;
+}
+
+body.high-contrast h3,
+body.high-contrast .completion-card h4,
+body.high-contrast .recipe-card h4,
+body.high-contrast .completion-region-footer,
+body.high-contrast .completer-tally {
+    color: #003f73;
+    border-color: #003f73;
+}
+
+body.high-contrast .button-group button,
+body.high-contrast .nav-button,
+body.high-contrast .ruleset-button.selected {
+    background-color: #003f73;
+    color: #ffffff;
+}
+
+body.high-contrast .nav-button {
+    background-color: #7a4300;
+}
+
+body.high-contrast .button-group button:hover,
+body.high-contrast .nav-button:hover {
+    background-color: #000000;
+}
+
+body.high-contrast .button-group button.contrast-toggle-button {
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: inset 0 0 0 2px #000000;
+}
+
+body.high-contrast .button-group button.contrast-toggle-button:hover {
+    background-color: #eeeeee;
+    color: #000000;
+}
+
+
+body.high-contrast .button-group button:focus-visible,
+body.high-contrast .nav-button:focus-visible,
+body.high-contrast .ingredient-button:focus-visible,
+body.high-contrast .control-group select:focus-visible {
+    outline-color: #000000;
+}
+
+body.high-contrast .ingredient-button,
+body.high-contrast .control-group select,
+body.high-contrast .recipe-card,
+body.high-contrast .completion-card,
+body.high-contrast #results li {
+    outline: none;
+    box-shadow: inset 0 0 0 2px #111111;
+}
+
+body.high-contrast .ingredient-button.selected.common,
+body.high-contrast #results li.ingredient.common,
+body.high-contrast .completion-card .ingredient.common,
+body.high-contrast #completer-results .completion-card .ingredient.common {
+    background-color: #2f6f22;
+    color: #ffffff;
+}
+
+body.high-contrast .ingredient-button.selected.uncommon,
+body.high-contrast #results li.ingredient.uncommon,
+body.high-contrast .completion-card .ingredient.uncommon,
+body.high-contrast #completer-results .completion-card .ingredient.uncommon {
+    background-color: #ffe45c;
+    color: #111111;
+}
+
+body.high-contrast .ingredient-button.selected.rare,
+body.high-contrast #results li.ingredient.rare,
+body.high-contrast .completion-card .ingredient.rare,
+body.high-contrast #completer-results .completion-card .ingredient.rare {
+    background-color: #a8321f;
+    color: #ffffff;
+}
+
+body.high-contrast .completion-region-footer {
+    border-top-color: #003f73;
+}
+
+.button-group button.contrast-toggle-button[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 2px #000000;
+}
+
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+
+/* Mobile responsive restoration */
+@media (max-width: 800px) {
+    .container {
+        width: 92%;
+        padding: 22px 18px;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        font-size: 42px;
+        line-height: 1;
+    }
+
+    h2 {
+        font-size: 18px;
+        line-height: 1.3;
+    }
+
+    .ingredient-columns {
+        display: block;
+    }
+
+    .column {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0;
+        margin-bottom: 12px;
+    }
+
+    .ingredient-button {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 0 3px 0;
+        text-align: left;
+    }
+
+    #results {
+        display: block;
+    }
+
+    .recipe-column {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .completer-controls {
+        display: block;
+    }
+
+    .control-group {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 14px;
+    }
+
+    .completion-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #results .recipe-card li.ingredient,
+    #completer-results .completion-card .ingredient,
+    .completion-card .ingredient {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .recipe-card,
+    .completion-card,
+    #completer-results .completion-card {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+}
+
+@media (max-width: 520px) {
+    .container {
+        width: 94%;
+        padding: 18px 14px;
+    }
+
+    h1 {
+        font-size: 34px;
+    }
+
+    .button-group button,
+    .nav-button {
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+}
+
+
+
+
+/* Two-row top controls */
+.top-button-group {
+    margin-bottom: 28px;
+}
+
+.primary-button-row,
+.inventory-button-row {
+    text-align: center;
+}
+
+.inventory-button-row {
+    margin-top: 10px;
+}
+
+.button-group button.inventory-button {
+    background-color: #dedede;
+    color: #333333;
+    padding: 7px 12px;
+    font-size: 13px;
+    margin: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.button-group button.inventory-button:hover {
+    background-color: #cfcfcf;
+    color: #333333;
+}
+
+body.high-contrast .button-group button.inventory-button {
+    background-color: #d0d0d0;
+    color: #000000;
+    box-shadow: inset 0 0 0 2px #000000;
+}
+
+body.high-contrast .button-group button.inventory-button:hover {
+    background-color: #cfcfcf;
+    color: #000000;
+}
+
+@media (max-width: 800px) {
+    /* mobile button-row spacing */
+    .inventory-button-row {
+        margin-top: 12px;
+    }
+}
+
+
+
+
+@media (max-width: 800px) {
+    /* Ingredient spacing is controlled with flex gaps, not <br> tags. */
+    .column {
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+
+    .ingredient-button {
+        margin: 0 !important;
+    }
+
+    #results .recipe-card li.ingredient,
+    #completer-results .completion-card .ingredient,
+    .completion-card .ingredient {
+        margin-top: 4px !important;
+        margin-bottom: 4px !important;
+    }
+}
+
+/* Inventory profile and backup state */
+.inventory-profile {
+    text-align: center;
+    font-size: 14px;
+    color: #577da1;
+    margin-top: -24px;
+    margin-bottom: 22px;
+    min-height: 20px;
+}
+.inventory-profile strong {
+    color: #2d2d2d;
+    font-weight: 700;
+}
+.button-group button.save-inventory-button.backup-empty {
+    background-color: #dedede;
+    color: #333333;
+}
+.button-group button.save-inventory-button.backup-dirty {
+    background-color: #c94545;
+    color: #ffffff;
+}
+.button-group button.save-inventory-button.backup-saved {
+    background-color: #7fbf7a;
+    color: #ffffff;
+}
+.button-group button.save-inventory-button.backup-empty:hover {
+    background-color: #cfcfcf;
+}
+.button-group button.save-inventory-button.backup-dirty:hover {
+    background-color: #a52d2d;
+}
+.button-group button.save-inventory-button.backup-saved:hover {
+    background-color: #5f9f5b;
+}
+body.high-contrast .inventory-profile,
+body.high-contrast .inventory-profile strong {
+    color: #111111;
+}
+
+/* Inventory modal dialogs */
+.inventory-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+}
+
+.inventory-modal {
+    width: min(440px, 100%);
+    background: #fffadb;
+    color: #2d2d2d;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    padding: 24px;
+}
+
+.inventory-modal h3 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.inventory-modal p {
+    margin: 0 0 16px 0;
+    line-height: 1.45;
+}
+
+.inventory-modal label {
+    display: block;
+    margin: 12px 0 6px 0;
+    color: #577da1;
+    font-size: 14px;
+}
+
+.inventory-modal input {
+    width: 100%;
+    border: 1px solid #b7b7b7;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 15px;
+    background: #ffffff;
+    color: #2d2d2d;
+}
+
+.inventory-modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.inventory-modal-actions button {
+    border: none;
+    border-radius: 4px;
+    padding: 9px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.inventory-modal-actions .modal-primary {
+    background: #65ade8;
+    color: #ffffff;
+}
+
+.inventory-modal-actions .modal-secondary {
+    background: #dedede;
+    color: #333333;
+}
+
+.inventory-modal-actions .modal-danger {
+    background: #c95d4f;
+    color: #ffffff;
+}
+
+.inventory-modal-actions .modal-primary:hover {
+    background: #005fa3;
+}
+
+.inventory-modal-actions .modal-secondary:hover {
+    background: #cfcfcf;
+}
+
+.inventory-modal-actions .modal-danger:hover {
+    background: #a94438;
+}
+
+body.high-contrast .inventory-modal {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: inset 0 0 0 3px #000000;
+}
+
+body.high-contrast .inventory-modal h3,
+body.high-contrast .inventory-modal label {
+    color: #000000;
+}
+
+/* Toolkit navigation revamp */
+.toolkit-header {
+    text-align: center;
+}
+
+.toolkit-header h1 {
+    margin-bottom: 12px;
+}
+
+.toolkit-header h2 {
+    margin-top: 14px;
+    margin-bottom: 6px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.tool-description {
+    color: #577da1;
+    font-size: 16px;
+    line-height: 1.35;
+    margin: 0 auto 18px auto;
+    max-width: 720px;
+}
+
+.toolkit-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 8px auto 8px auto;
+}
+
+.toolkit-nav-link {
+    display: inline-block;
+    background-color: #ede1cd;
+    color: #333333;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 14px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+.toolkit-nav-link:hover {
+    background-color: #d9c7aa;
+    color: #333333;
+}
+
+.toolkit-nav-link.active {
+    background-color: #f6c65b;
+    color: #2d2d2d;
+}
+
+.top-button-group {
+    margin-top: 10px;
+}
+
+.primary-button-row {
+    margin-bottom: 12px;
+}
+
+.coming-soon-card {
+    background-color: #fff3c7;
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin: 18px 0 24px 0;
+    text-align: center;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
+}
+
+.coming-soon-card h3 {
+    margin-top: 0;
+}
+
+body.high-contrast .tool-description,
+body.high-contrast .toolkit-nav-link,
+body.high-contrast .toolkit-nav-link.active {
+    color: #000000;
+}
+
+body.high-contrast .toolkit-nav-link {
+    background-color: #ffffff;
+    box-shadow: inset 0 0 0 2px #000000;
+}
+
+body.high-contrast .toolkit-nav-link.active {
+    background-color: #ffff00;
+}
+
+body.high-contrast .coming-soon-card {
+    background-color: #ffffff;
+    box-shadow: inset 0 0 0 2px #000000;
+}
+
+@media (max-width: 800px) {
+    .toolkit-nav {
+        gap: 6px;
+    }
+
+    .toolkit-nav-link {
+        font-size: 13px;
+        padding: 7px 10px;
+    }
+
+    .tool-description {
+        font-size: 15px;
+    }
+
+    .primary-button-row {
+        margin-bottom: 14px;
+    }
+}
+
+/* Save/backup state overrides - patched */
+.button-group .inventory-button.save-inventory-button.backup-empty {
+    background-color: #dedede !important;
+    color: #333333 !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-dirty {
+    background-color: #c94545 !important;
+    color: #ffffff !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-saved {
+    background-color: #7fbf7a !important;
+    color: #ffffff !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-empty:hover {
+    background-color: #cfcfcf !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-dirty:hover {
+    background-color: #a52d2d !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-saved:hover {
+    background-color: #5f9f5b !important;
+}
+
+/* Save Inventory dirty-state red only (final override) */
+.button-group .inventory-button.save-inventory-button.backup-empty {
+    background-color: #dedede !important;
+    color: #333333 !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-dirty {
+    background-color: #c94545 !important;
+    color: #ffffff !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-saved {
+    background-color: #7fbf7a !important;
+    color: #ffffff !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-empty:hover {
+    background-color: #cfcfcf !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-dirty:hover {
+    background-color: #a52d2d !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-saved:hover {
+    background-color: #5f9f5b !important;
+}
+
+/* Forager's Aid test */
+.foraging-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin: 18px 0 12px 0;
+}
+
+.foraging-controls .control-group {
+    width: 190px;
+}
+
+.foraging-controls input {
+    width: 100%;
+    border: 1px solid #b7b7b7;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 15px;
+    background: #ffffff;
+    color: #2d2d2d;
+}
+
+.foraging-options {
+    text-align: center;
+    margin: 8px 0 20px 0;
+}
+
+.checkbox-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 4px 10px;
+    color: #577da1;
+    font-size: 14px;
+}
+
+.foraging-result-card {
+    text-align: center;
+}
+
+.foraging-result-card .completion-recipe-list {
+    max-width: 520px;
+    margin: 10px auto;
+}
+
+.foraging-result-actions {
+    margin-top: 14px;
+    margin-bottom: 0;
+}
+
+.foraging-debug {
+    background-color: #fffadb;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 12px 0;
+    color: #2d2d2d;
+    box-shadow: inset 0 0 0 1px rgba(87, 125, 161, 0.35);
+}
+
+.foraging-debug summary {
+    cursor: pointer;
+    color: #577da1;
+    font-weight: 700;
+}
+
+body.high-contrast .foraging-controls input,
+body.high-contrast .foraging-debug {
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: inset 0 0 0 2px #000000;
+}
+
+body.high-contrast .checkbox-option,
+body.high-contrast .foraging-debug summary {
+    color: #000000;
+}
+
+@media (max-width: 800px) {
+    .foraging-controls {
+        display: block;
+    }
+
+    .foraging-controls .control-group {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 14px;
+    }
+
+    .checkbox-option {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+/* ==========================================================
+   Mockup-inspired application shell
+   ========================================================== */
+:root {
+    --ui-bg: #ffffff;
+    --ui-text: #050505;
+    --ui-muted: #555555;
+    --ui-line: #111111;
+    --ui-red: #d10000;
+    --ui-green: #208a2d;
+}
+
+body {
+    background: var(--ui-bg);
+    color: var(--ui-text);
+}
+
+.container {
+    width: 94%;
+    max-width: 1100px;
+    margin: 22px auto;
+    padding: 0 28px 28px;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.app-header {
+    text-align: center;
+}
+
+.app-utility-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 48px;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.inventory-strip,
+.preference-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inventory-strip {
+    text-align: left;
+}
+
+.preference-strip {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.utility-line,
+.current-inventory-line,
+.values-control,
+.contrast-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.utility-heading {
+    font-weight: 700;
+    color: var(--ui-text);
+}
+
+.utility-heading.small {
+    font-size: 12px;
+}
+
+.utility-link {
+    appearance: none;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font: inherit;
+    color: var(--ui-text) !important;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.utility-link:hover,
+.utility-link:focus-visible {
+    text-decoration: underline;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.save-inventory-button.backup-dirty {
+    color: var(--ui-red) !important;
+}
+
+.save-inventory-button.backup-saved {
+    color: var(--ui-green) !important;
+}
+
+.inventory-profile {
+    margin: 0;
+    min-height: 0;
+    color: var(--ui-text);
+    font-size: 12px;
+}
+
+.inventory-profile strong {
+    color: var(--ui-text);
+}
+
+.value-choice,
+.hc-state {
+    color: var(--ui-text);
+}
+
+.value-choice.active,
+.hc-state.active {
+    border-bottom: 2px solid var(--ui-line) !important;
+    text-decoration: none !important;
+}
+
+.contrast-toggle-button {
+    font-size: 13px;
+}
+
+h1 {
+    color: var(--ui-text);
+    font-size: 44px;
+    line-height: 1;
+    margin: 0 0 18px;
+    letter-spacing: 0.01em;
+}
+
+.toolkit-nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 0 auto 20px;
+}
+
+.toolkit-nav-link {
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0 0 5px;
+    color: var(--ui-text);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+}
+
+.toolkit-nav-link:hover {
+    background: none;
+    color: var(--ui-text);
+    border-bottom-color: var(--ui-muted);
+}
+
+.toolkit-nav-link.active {
+    background: none;
+    color: var(--ui-text);
+    border-bottom-color: var(--ui-line);
+}
+
+.tool-description {
+    color: var(--ui-text);
+    font-size: 14px;
+    margin: 0 auto 24px;
+}
+
+.top-button-group {
+    margin: 0 0 30px;
+}
+
+.primary-button-row {
+    margin: 0;
+}
+
+.button-group .primary-action-button {
+    background: #ffffff;
+    color: var(--ui-text);
+    border: 2px solid var(--ui-line);
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    margin: 0;
+}
+
+.button-group .primary-action-button:hover,
+.button-group .primary-action-button:focus-visible {
+    background: #f2f2f2;
+    box-shadow: none;
+}
+
+.button-group button:not(.primary-action-button) {
+    box-shadow: none;
+}
+
+/* Keep functional alert colors limited to their roles. */
+.button-group .inventory-button.save-inventory-button.backup-dirty,
+.button-group .utility-link.save-inventory-button.backup-dirty {
+    color: var(--ui-red) !important;
+    background: none !important;
+}
+
+.button-group .inventory-button.save-inventory-button.backup-saved,
+.button-group .utility-link.save-inventory-button.backup-saved {
+    color: var(--ui-green) !important;
+    background: none !important;
+}
+
+/* Reduce decorative weight while preserving content structure. */
+.recipe-card,
+.completion-card,
+.ingredient-button,
+#results li {
+    box-shadow: none;
+}
+
+.recipe-card,
+.completion-card {
+    border: 1px solid #dddddd;
+}
+
+@media (max-width: 800px) {
+    .container {
+        width: 94%;
+        padding: 0 16px 24px;
+        margin-top: 18px;
+    }
+
+    .app-utility-bar {
+        display: block;
+        margin-bottom: 36px;
+    }
+
+    .preference-strip {
+        align-items: flex-start;
+        text-align: left;
+        margin-top: 16px;
+    }
+
+    .utility-line,
+    .current-inventory-line,
+    .values-control,
+    .contrast-control {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 34px;
+    }
+
+    .toolkit-nav {
+        gap: 14px;
+    }
+
+    .toolkit-nav-link {
+        font-size: 17px;
+    }
+}
+
+
+/* Inventory quantity view */
+.inventory-view-modal {
+    width: min(620px, 100%);
+}
+
+.inventory-view-subtitle {
+    margin-top: -6px !important;
+    color: var(--ui-muted, #555555);
+    font-size: 14px;
+}
+
+.inventory-view-list {
+    max-height: min(60vh, 520px);
+    overflow: auto;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    margin: 14px 0 18px;
+}
+
+.inventory-view-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.inventory-view-row:last-child {
+    border-bottom: none;
+}
+
+.inventory-view-name {
+    font-size: 14px;
+    line-height: 1.25;
+}
+
+.inventory-quantity-controls {
+    display: inline-grid;
+    grid-template-columns: 32px 38px 32px;
+    align-items: center;
+    gap: 4px;
+}
+
+.inventory-quantity-button {
+    appearance: none;
+    background: #ffffff;
+    border: 1px solid #111111;
+    border-radius: 4px;
+    color: #111111;
+    cursor: pointer;
+    font: inherit;
+    line-height: 1;
+    padding: 7px 0;
+    text-align: center;
+}
+
+.inventory-quantity-button:hover,
+.inventory-quantity-button:focus-visible {
+    background: #f2f2f2;
+}
+
+.inventory-quantity-count {
+    text-align: center;
+    font-size: 14px;
+    color: #111111;
+}
+
+.inventory-view-empty {
+    text-align: center;
+    color: var(--ui-muted, #555555);
+    margin: 18px 0;
+}
+
+body.high-contrast .inventory-view-list,
+body.high-contrast .inventory-view-row {
+    border-color: #000000;
+}
+
+body.high-contrast .inventory-quantity-button {
+    background: #ffffff;
+    border-color: #000000;
+    color: #000000;
+}
+
+@media (max-width: 520px) {
+    .inventory-view-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .inventory-quantity-controls {
+        justify-self: start;
+    }
+}
+
+
+/* ==========================================================
+   Final mockup layout alignment
+   ========================================================== */
+html,
+body {
+    background: #ffffff !important;
+}
+
+body {
+    color: #000000 !important;
+}
+
+.container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: 26px 28px 30px !important;
+    background: #ffffff !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.app-header {
+    text-align: center !important;
+}
+
+.app-utility-bar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 24px !important;
+    width: 100% !important;
+    margin: 0 0 54px 0 !important;
+    font-size: 14px !important;
+    line-height: 1.1 !important;
+}
+
+.inventory-strip,
+.preference-strip {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.inventory-strip {
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+.preference-strip {
+    align-items: flex-end !important;
+    text-align: right !important;
+}
+
+.utility-line,
+.current-inventory-line,
+.values-control,
+.contrast-control {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 10px !important;
+}
+
+.utility-heading {
+    font-weight: 700 !important;
+    color: #000000 !important;
+}
+
+.utility-heading.small {
+    font-size: 12px !important;
+}
+
+.utility-link,
+a.utility-link,
+button.utility-link,
+.value-choice,
+.contrast-toggle-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font: inherit !important;
+    line-height: inherit !important;
+    color: #000000 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+.utility-link:hover,
+.utility-link:focus-visible {
+    text-decoration: underline !important;
+    outline: none !important;
+}
+
+.save-inventory-button.backup-dirty,
+a.save-inventory-button.backup-dirty {
+    color: #d10000 !important;
+}
+
+.save-inventory-button.backup-saved,
+a.save-inventory-button.backup-saved {
+    color: #208a2d !important;
+}
+
+.inventory-profile {
+    margin: 0 !important;
+    min-height: 0 !important;
+    color: #000000 !important;
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+}
+
+.inventory-profile strong {
+    color: #000000 !important;
+}
+
+.value-choice.active,
+.hc-state.active {
+    border-bottom: 2px solid #000000 !important;
+    padding-bottom: 2px !important;
+}
+
+.hc-state {
+    color: #000000 !important;
+}
+
+h1 {
+    color: #000000 !important;
+    font-size: 42px !important;
+    line-height: 1 !important;
+    margin: 0 0 18px 0 !important;
+    letter-spacing: 0.01em !important;
+}
+
+.toolkit-nav {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 24px !important;
+    flex-wrap: wrap !important;
+    margin: 0 auto 24px !important;
+}
+
+.toolkit-nav-link {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 0 5px 0 !important;
+    margin: 0 !important;
+    color: #000000 !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+    text-decoration: none !important;
+    border-bottom: 2px solid transparent !important;
+}
+
+.toolkit-nav-link:hover {
+    background: transparent !important;
+    border-bottom-color: #777777 !important;
+}
+
+.toolkit-nav-link.active {
+    background: transparent !important;
+    border-bottom-color: #000000 !important;
+}
+
+.tool-description {
+    color: #000000 !important;
+    font-size: 14px !important;
+    margin: 0 auto 24px !important;
+    max-width: 720px !important;
+    line-height: 1.35 !important;
+}
+
+.primary-action-wrap {
+    text-align: center !important;
+    margin: 0 0 28px !important;
+}
+
+.primary-action-button,
+button.primary-action-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    padding: 10px 20px !important;
+    font: inherit !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    cursor: pointer !important;
+}
+
+.primary-action-button:hover,
+.primary-action-button:focus-visible {
+    background: #f2f2f2 !important;
+    box-shadow: none !important;
+}
+
+/* Keep form/result UI quiet but usable. */
+.recipe-card,
+.completion-card,
+.ingredient-button,
+#results li {
+    box-shadow: none !important;
+}
+
+.recipe-card,
+.completion-card {
+    border: 1px solid #dddddd !important;
+}
+
+/* Inventory modal controls should remain real controls. */
+.inventory-modal .inventory-modal-actions button,
+.inventory-modal .inventory-quantity-button {
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+    font: inherit !important;
+}
+
+@media (max-width: 800px) {
+    .container {
+        padding: 20px 18px 28px !important;
+    }
+
+    .app-utility-bar {
+        display: block !important;
+        margin-bottom: 40px !important;
+    }
+
+    .preference-strip {
+        align-items: flex-start !important;
+        text-align: left !important;
+        margin-top: 16px !important;
+    }
+
+    .utility-line,
+    .current-inventory-line,
+    .values-control,
+    .contrast-control {
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+
+    h1 {
+        font-size: 34px !important;
+    }
+
+    .toolkit-nav {
+        gap: 16px !important;
+    }
+
+    .toolkit-nav-link {
+        font-size: 17px !important;
+    }
+}
+
+
+/* ==========================================================
+   Requested layout refinements
+   ========================================================== */
+.container {
+    width: 86% !important;
+    max-width: 1100px !important;
+    margin: 14px auto 34px !important;
+    padding: 34px 40px 42px !important;
+    background: #ffffff !important;
+    border: 1px solid #d7d9dd !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+.app-utility-bar {
+    margin-bottom: 50px !important;
+}
+
+.utility-link:hover,
+.utility-link:focus-visible {
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+.utility-link:not(.hc-toggle-link):hover,
+.utility-link:not(.hc-toggle-link):focus-visible {
+    border-bottom: 1px solid #000000 !important;
+}
+
+.hc-toggle-link {
+    color: #000000 !important;
+    text-decoration: none !important;
+    border-bottom: 2px solid transparent !important;
+    padding-bottom: 2px !important;
+}
+
+.hc-toggle-link:hover,
+.hc-toggle-link:focus-visible,
+.hc-toggle-link.active {
+    border-bottom-color: #000000 !important;
+    text-decoration: none !important;
+}
+
+.contrast-icon {
+    color: #000000;
+    line-height: 1;
+}
+
+.value-choice {
+    border-bottom: 2px solid transparent !important;
+    padding-bottom: 2px !important;
+}
+
+.value-choice:hover,
+.value-choice:focus-visible,
+.value-choice.active {
+    border-bottom-color: #000000 !important;
+}
+
+@media (max-width: 800px) {
+    .container {
+        width: 94% !important;
+        padding: 22px 18px 30px !important;
+    }
+}
+
+
+/* Inventory menu text-state refinement */
+.inventory-strip .utility-line {
+    gap: 12px !important;
+}
+
+.inventory-strip .save-inventory-button.backup-dirty {
+    color: #d10000 !important;
+}
+
+.inventory-strip .save-inventory-button.backup-saved {
+    color: #208a2d !important;
+}
+
+.inventory-strip .save-inventory-button.backup-empty {
+    color: #000000 !important;
+}
+
+
+/* ==========================================================
+   Consistency pass: fixed header rhythm + no hover layout shift
+   ========================================================== */
+.container {
+    width: 86% !important;
+    max-width: 1100px !important;
+    margin: 14px auto 34px !important;
+    padding: 34px 40px 42px !important;
+    background: #ffffff !important;
+    border: 1px solid #d7d9dd !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+.app-header {
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.app-utility-bar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    min-height: 34px !important;
+    margin: 0 0 52px 0 !important;
+    padding: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.1 !important;
+}
+
+.inventory-strip,
+.preference-strip {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    min-height: 34px !important;
+}
+
+.inventory-strip {
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+.preference-strip {
+    align-items: flex-end !important;
+    text-align: right !important;
+}
+
+.utility-line,
+.current-inventory-line,
+.values-control,
+.contrast-control {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 10px !important;
+    min-height: 16px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.utility-heading {
+    font-weight: 700 !important;
+    color: #000000 !important;
+}
+
+.utility-heading.small,
+.inventory-profile {
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+}
+
+.inventory-profile {
+    display: inline-block !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    color: #000000 !important;
+}
+
+.inventory-profile strong {
+    color: #000000 !important;
+}
+
+/* All top-bar links reserve underline space from the start. */
+.utility-link,
+a.utility-link,
+button.utility-link,
+.value-choice,
+.hc-toggle-link {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    display: inline-block !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 2px solid transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 0 2px 0 !important;
+    margin: 0 !important;
+    font: inherit !important;
+    line-height: 1.1 !important;
+    color: #000000 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+/* Override older thin-hover underline rules. */
+.utility-link:hover,
+.utility-link:focus-visible,
+.utility-link:not(.hc-toggle-link):hover,
+.utility-link:not(.hc-toggle-link):focus-visible {
+    text-decoration: none !important;
+    outline: none !important;
+    border-bottom-width: 2px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #000000 !important;
+}
+
+/* Save states are color-only; they still reserve underline space. */
+.save-inventory-button.backup-dirty,
+a.save-inventory-button.backup-dirty {
+    color: #d10000 !important;
+    background: transparent !important;
+}
+
+.save-inventory-button.backup-saved,
+a.save-inventory-button.backup-saved {
+    color: #208a2d !important;
+    background: transparent !important;
+}
+
+.save-inventory-button.backup-empty,
+a.save-inventory-button.backup-empty {
+    color: #000000 !important;
+    background: transparent !important;
+}
+
+/* Values and HC use the same active/hover underline, with no vertical movement. */
+.value-choice,
+.hc-toggle-link {
+    border-bottom-color: transparent !important;
+}
+
+.value-choice:hover,
+.value-choice:focus-visible,
+.value-choice.active,
+.hc-toggle-link:hover,
+.hc-toggle-link:focus-visible,
+.hc-toggle-link.active {
+    border-bottom-color: #000000 !important;
+    text-decoration: none !important;
+}
+
+.contrast-icon {
+    display: inline-block !important;
+    color: #000000 !important;
+    line-height: 1.1 !important;
+    border-bottom: 2px solid transparent !important;
+    padding-bottom: 2px !important;
+}
+
+/* Stable title/nav/description measurements across all pages. */
+h1 {
+    color: #000000 !important;
+    font-size: 42px !important;
+    line-height: 1 !important;
+    margin: 0 0 18px 0 !important;
+    letter-spacing: 0.01em !important;
+}
+
+.toolkit-nav {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 24px !important;
+    flex-wrap: wrap !important;
+    margin: 0 auto 20px !important;
+    padding: 0 !important;
+    min-height: 28px !important;
+}
+
+.toolkit-nav-link {
+    display: inline-block !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border-bottom: 2px solid transparent !important;
+    padding: 0 0 5px 0 !important;
+    margin: 0 !important;
+    color: #000000 !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+    text-decoration: none !important;
+}
+
+.toolkit-nav-link:hover,
+.toolkit-nav-link:focus-visible {
+    background: transparent !important;
+    border-bottom-color: #777777 !important;
+    text-decoration: none !important;
+}
+
+.toolkit-nav-link.active {
+    background: transparent !important;
+    border-bottom-color: #000000 !important;
+}
+
+.tool-description {
+    color: #000000 !important;
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+    min-height: 19px !important;
+    margin: 0 auto 24px !important;
+    max-width: 760px !important;
+}
+
+.primary-action-wrap {
+    text-align: center !important;
+    min-height: 42px !important;
+    margin: 0 0 28px !important;
+    padding: 0 !important;
+}
+
+.primary-action-button,
+button.primary-action-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    padding: 10px 20px !important;
+    font: inherit !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    cursor: pointer !important;
+}
+
+.primary-action-button:hover,
+.primary-action-button:focus-visible {
+    background: #f2f2f2 !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 800px) {
+    .container {
+        width: 94% !important;
+        padding: 22px 18px 30px !important;
+    }
+
+    .app-utility-bar {
+        display: block !important;
+        min-height: 0 !important;
+        margin-bottom: 40px !important;
+    }
+
+    .preference-strip {
+        align-items: flex-start !important;
+        text-align: left !important;
+        margin-top: 16px !important;
+    }
+
+    .utility-line,
+    .current-inventory-line,
+    .values-control,
+    .contrast-control {
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+
+    h1 {
+        font-size: 34px !important;
+    }
+
+    .toolkit-nav {
+        gap: 16px !important;
+        min-height: 24px !important;
+    }
+
+    .toolkit-nav-link {
+        font-size: 17px !important;
+    }
+
+    .tool-description {
+        min-height: 0 !important;
+    }
+}
+
+
+/* ==========================================================
+   Final polish: stable header, binary hover, renamed app, recipe collapse
+   ========================================================== */
+
+/* Keep top bar spacing identical while links change text/color. */
+.utility-line,
+.current-inventory-line,
+.values-control,
+.contrast-control {
+    min-height: 18px !important;
+    align-items: baseline !important;
+}
+
+.utility-link,
+.value-choice,
+.hc-toggle-link {
+    border-bottom: 2px solid transparent !important;
+    padding-bottom: 2px !important;
+    line-height: 1.1 !important;
+    text-decoration: none !important;
+}
+
+.utility-link:hover,
+.utility-link:focus-visible,
+.utility-link:not(.hc-toggle-link):hover,
+.utility-link:not(.hc-toggle-link):focus-visible {
+    text-decoration: none !important;
+    border-bottom-color: #000000 !important;
+}
+
+/* Binary controls: when hovering one option, temporarily suppress the active underline on the other. */
+.values-control.has-hover .value-choice.active,
+.contrast-control.has-hover .hc-toggle-link.active {
+    border-bottom-color: transparent !important;
+}
+
+.values-control.has-hover .value-choice.hover-active,
+.contrast-control.has-hover .hc-toggle-link.hover-active {
+    border-bottom-color: #000000 !important;
+}
+
+.value-choice.active,
+.hc-toggle-link.active {
+    border-bottom-color: #000000 !important;
+}
+
+.hc-off.active {
+    border-bottom-color: #000000 !important;
+}
+
+/* Current inventory line should match the inventory nav size. */
+.utility-heading.small,
+.inventory-profile {
+    font-size: 14px !important;
+}
+
+.inventory-profile em {
+    font-style: italic !important;
+    font-weight: 400 !important;
+}
+
+/* Bigger site title. */
+h1 {
+    font-size: 52px !important;
+    margin-bottom: 18px !important;
+}
+
+/* Better fixed widths so Save/Saved does not cause the inventory links to twitch. */
+.inventory-strip .save-inventory-button {
+    min-width: 42px !important;
+    text-align: left !important;
+}
+
+/* Collapsible Recipe Generator results */
+.potion-group-card {
+    background: #fff3c7;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.potion-group-card summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 12px 14px;
+    color: #000000;
+}
+
+.potion-group-card summary::-webkit-details-marker {
+    display: none;
+}
+
+.potion-group-card summary::before {
+    content: "+";
+    display: inline-block;
+    width: 1.1em;
+    margin-right: 4px;
+    font-weight: 700;
+}
+
+.potion-group-card[open] summary::before {
+    content: "–";
+}
+
+.potion-group-title {
+    display: block;
+    color: #577da1;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.potion-group-count {
+    display: block;
+    margin-top: 3px;
+    color: #555555;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.potion-group-recipes {
+    padding: 0 14px 12px;
+}
+
+.recipe-subcard {
+    border-top: 1px solid rgba(87, 125, 161, 0.25);
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.recipe-subcard h5 {
+    margin: 0 0 8px 0;
+    color: #000000;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.recipe-subcard ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.recipe-subcard .ingredient {
+    display: block;
+    width: 100%;
+    padding: 7px 9px;
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.25;
+    border-radius: 5px;
+    border: none;
+    box-shadow: none;
+}
+
+.copyright-disclaimer {
+    max-width: 760px;
+    margin: 8px auto 0;
+}
+
+@media (max-width: 800px) {
+    h1 {
+        font-size: 40px !important;
+    }
+}
+
+
+/* ==========================================================
+   Color scheme return + final spacing refinements
+   ========================================================== */
+body {
+    background-color: #65ade8 !important;
+    color: #2d2d2d !important;
+}
+
+.container {
+    background-color: #fffadb !important;
+    border-color: rgba(87, 125, 161, 0.35) !important;
+}
+
+.utility-heading,
+.utility-link,
+a.utility-link,
+.value-choice,
+.hc-toggle-link,
+.hc-state,
+.contrast-icon,
+.inventory-profile,
+.inventory-profile em,
+.toolkit-nav-link,
+h1,
+.tool-description {
+    color: #2d2d2d !important;
+}
+
+h1 {
+    color: #DCA453 !important;
+}
+
+.toolkit-nav-link.active,
+.toolkit-nav-link:hover,
+.toolkit-nav-link:focus-visible {
+    border-bottom-color: #DCA453 !important;
+}
+
+.value-choice.active,
+.value-choice:hover,
+.value-choice:focus-visible,
+.hc-toggle-link.active,
+.hc-toggle-link:hover,
+.hc-toggle-link:focus-visible,
+.values-control.has-hover .value-choice.hover-active,
+.contrast-control.has-hover .hc-toggle-link.hover-active {
+    border-bottom-color: #DCA453 !important;
+}
+
+.values-control.has-hover .value-choice.active,
+.contrast-control.has-hover .hc-toggle-link.active {
+    border-bottom-color: transparent !important;
+}
+
+.utility-link:not(.hc-toggle-link):hover,
+.utility-link:not(.hc-toggle-link):focus-visible {
+    border-bottom-color: #DCA453 !important;
+}
+
+/* Save/Saved should size naturally; Load may shift when text changes. */
+.inventory-strip .save-inventory-button {
+    min-width: 0 !important;
+    width: auto !important;
+}
+
+.save-inventory-button.backup-dirty,
+a.save-inventory-button.backup-dirty {
+    color: #c94545 !important;
+}
+
+.save-inventory-button.backup-saved,
+a.save-inventory-button.backup-saved {
+    color: #5f9f5b !important;
+}
+
+/* Slightly larger description text. */
+.tool-description {
+    font-size: 16px !important;
+}
+
+/* Bring warmth back to controls and cards without making them heavy. */
+.primary-action-button,
+button.primary-action-button {
+    border-color: #577da1 !important;
+    color: #2d2d2d !important;
+    background-color: #ffffff !important;
+}
+
+.primary-action-button:hover,
+.primary-action-button:focus-visible {
+    background-color: #ede1cd !important;
+}
+
+.ingredient-button {
+    background-color: #ede1cd !important;
+    border: none !important;
+}
+
+.ingredient-button.selected.common,
+.ingredient.common,
+.recipe-subcard .ingredient.common {
+    background-color: #c2e3a7 !important;
+    color: #333333 !important;
+}
+
+.ingredient-button.selected.uncommon,
+.ingredient.uncommon,
+.recipe-subcard .ingredient.uncommon {
+    background-color: #fde663 !important;
+    color: #333333 !important;
+}
+
+.ingredient-button.selected.rare,
+.ingredient.rare,
+.recipe-subcard .ingredient.rare {
+    background-color: #fd8966 !important;
+    color: #ffffff !important;
+}
+
+.recipe-card,
+.completion-card,
+.potion-group-card {
+    background-color: #fff3c7 !important;
+    border-color: rgba(87, 125, 161, 0.28) !important;
+}
+
+.potion-group-title,
+.recipe-card h4,
+.completion-card h4,
+h3,
+.control-group label,
+.completion-region-footer,
+.completer-tally {
+    color: #577da1 !important;
+}
+
+h3 {
+    border-bottom-color: #577da1 !important;
+}
+
+.recipe-summary {
+    color: #DCA453 !important;
+    border-bottom-color: #DCA453 !important;
+}
+
+/* Footer should be larger and centered. */
+.site-footer {
+    text-align: center !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    color: #555555 !important;
+}
+
+.site-footer p,
+.copyright-disclaimer {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.site-footer a {
+    color: #577da1 !important;
+}
+
+@media (max-width: 800px) {
+    .tool-description {
+        font-size: 15px !important;
+    }
+}
+
+
+/* Recipe group summary layout tweak */
+.potion-group-card summary{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+}
+
+.potion-group-card summary::before{
+    order:2;
+    width:auto;
+    margin-right:0;
+    margin-left:12px;
+    font-size:20px;
+    line-height:1;
+    flex:0 0 auto;
+}
+
+.potion-group-title{
+    flex:1 1 auto;
+}
+
+.potion-group-count{
+    display:inline-block;
+    margin-top:4px;
+    font-size:14px;
+    color:#555555;
+}
+
+
+/* ==========================================================
+   FINAL COLOR + SPACING FIX
+   This block intentionally comes last.
+   ========================================================== */
+
+/* Bring the colorful site palette back. */
+html body {
+    background-color: #65ade8 !important;
+    color: #2d2d2d !important;
+}
+
+body:not(.high-contrast) .container {
+    background-color: #fffadb !important;
+    border: 1px solid rgba(87, 125, 161, 0.35) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+body:not(.high-contrast) h1 {
+    color: #DCA453 !important;
+}
+
+body:not(.high-contrast) .utility-heading,
+body:not(.high-contrast) .utility-link,
+body:not(.high-contrast) a.utility-link,
+body:not(.high-contrast) .value-choice,
+body:not(.high-contrast) .hc-toggle-link,
+body:not(.high-contrast) .hc-state,
+body:not(.high-contrast) .contrast-icon,
+body:not(.high-contrast) .inventory-profile,
+body:not(.high-contrast) .inventory-profile em,
+body:not(.high-contrast) .toolkit-nav-link,
+body:not(.high-contrast) .tool-description {
+    color: #2d2d2d !important;
+}
+
+/* Save/Saved should size naturally. Load may shift when Save becomes Saved. */
+body:not(.high-contrast) .inventory-strip .save-inventory-button,
+body:not(.high-contrast) .inventory-strip a.save-inventory-button,
+body:not(.high-contrast) .inventory-strip button.save-inventory-button {
+    min-width: 0 !important;
+    width: auto !important;
+    display: inline-block !important;
+    text-align: left !important;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+}
+
+/* Functional Save colors. */
+body:not(.high-contrast) .save-inventory-button.backup-dirty,
+body:not(.high-contrast) a.save-inventory-button.backup-dirty {
+    color: #c94545 !important;
+}
+
+body:not(.high-contrast) .save-inventory-button.backup-saved,
+body:not(.high-contrast) a.save-inventory-button.backup-saved {
+    color: #5f9f5b !important;
+}
+
+/* Main navigation hover underline should match the active underline. */
+body:not(.high-contrast) .toolkit-nav-link.active,
+body:not(.high-contrast) .toolkit-nav-link:hover,
+body:not(.high-contrast) .toolkit-nav-link:focus-visible {
+    border-bottom-color: #DCA453 !important;
+}
+
+/* Binary option underline color should match the palette too. */
+body:not(.high-contrast) .value-choice.active,
+body:not(.high-contrast) .value-choice:hover,
+body:not(.high-contrast) .value-choice:focus-visible,
+body:not(.high-contrast) .hc-toggle-link.active,
+body:not(.high-contrast) .hc-toggle-link:hover,
+body:not(.high-contrast) .hc-toggle-link:focus-visible,
+body:not(.high-contrast) .values-control.has-hover .value-choice.hover-active,
+body:not(.high-contrast) .contrast-control.has-hover .hc-toggle-link.hover-active {
+    border-bottom-color: #DCA453 !important;
+}
+
+/* Keep hover behavior clean for binary controls. */
+body:not(.high-contrast) .values-control.has-hover .value-choice.active:not(.hover-active),
+body:not(.high-contrast) .contrast-control.has-hover .hc-toggle-link.active:not(.hover-active) {
+    border-bottom-color: transparent !important;
+}
+
+/* Make the description text a bit larger. */
+body:not(.high-contrast) .tool-description {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+}
+
+/* Reintroduce the warm palette to content areas. */
+body:not(.high-contrast) .primary-action-button,
+body:not(.high-contrast) button.primary-action-button {
+    border-color: #577da1 !important;
+    color: #2d2d2d !important;
+    background-color: #ffffff !important;
+}
+
+body:not(.high-contrast) .primary-action-button:hover,
+body:not(.high-contrast) .primary-action-button:focus-visible {
+    background-color: #ede1cd !important;
+}
+
+body:not(.high-contrast) .ingredient-button {
+    background-color: #ede1cd !important;
+    color: #333333 !important;
+    border: none !important;
+}
+
+body:not(.high-contrast) .ingredient-button.selected.common,
+body:not(.high-contrast) .ingredient.common,
+body:not(.high-contrast) .recipe-subcard .ingredient.common {
+    background-color: #c2e3a7 !important;
+    color: #333333 !important;
+}
+
+body:not(.high-contrast) .ingredient-button.selected.uncommon,
+body:not(.high-contrast) .ingredient.uncommon,
+body:not(.high-contrast) .recipe-subcard .ingredient.uncommon {
+    background-color: #fde663 !important;
+    color: #333333 !important;
+}
+
+body:not(.high-contrast) .ingredient-button.selected.rare,
+body:not(.high-contrast) .ingredient.rare,
+body:not(.high-contrast) .recipe-subcard .ingredient.rare {
+    background-color: #fd8966 !important;
+    color: #ffffff !important;
+}
+
+body:not(.high-contrast) .recipe-card,
+body:not(.high-contrast) .completion-card,
+body:not(.high-contrast) .potion-group-card {
+    background-color: #fff3c7 !important;
+    border-color: rgba(87, 125, 161, 0.28) !important;
+}
+
+body:not(.high-contrast) .potion-group-title,
+body:not(.high-contrast) .recipe-card h4,
+body:not(.high-contrast) .completion-card h4,
+body:not(.high-contrast) h3,
+body:not(.high-contrast) .control-group label,
+body:not(.high-contrast) .completion-region-footer,
+body:not(.high-contrast) .completer-tally {
+    color: #577da1 !important;
+}
+
+body:not(.high-contrast) h3 {
+    border-bottom-color: #577da1 !important;
+}
+
+body:not(.high-contrast) .recipe-summary {
+    color: #DCA453 !important;
+    border-bottom-color: #DCA453 !important;
+}
+
+/* Footer: larger and centered. */
+body:not(.high-contrast) .site-footer {
+    text-align: center !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    color: #555555 !important;
+}
+
+body:not(.high-contrast) .site-footer p,
+body:not(.high-contrast) .copyright-disclaimer {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+body:not(.high-contrast) .site-footer a {
+    color: #577da1 !important;
+}
+
+@media (max-width: 800px) {
+    body:not(.high-contrast) .tool-description {
+        font-size: 15px !important;
+    }
+}
+
+
+/* ==========================================================
+   FINAL FIX: HC mode, Recipe Generator label support, nav hover shift
+   ========================================================== */
+
+/* Restore a clear HC effect, overriding normal-palette final blocks. */
+body.high-contrast {
+    background-color: #111111 !important;
+    color: #000000 !important;
+}
+
+body.high-contrast .container {
+    background-color: #ffffff !important;
+    border-color: #000000 !important;
+    box-shadow: 0 0 0 3px #000000 !important;
+}
+
+body.high-contrast h1 {
+    color: #8a4b00 !important;
+}
+
+body.high-contrast .utility-heading,
+body.high-contrast .utility-link,
+body.high-contrast a.utility-link,
+body.high-contrast .value-choice,
+body.high-contrast .hc-toggle-link,
+body.high-contrast .hc-state,
+body.high-contrast .contrast-icon,
+body.high-contrast .inventory-profile,
+body.high-contrast .inventory-profile em,
+body.high-contrast .toolkit-nav-link,
+body.high-contrast .tool-description,
+body.high-contrast .completer-intro,
+body.high-contrast .completer-empty,
+body.high-contrast .checkbox-option {
+    color: #000000 !important;
+}
+
+body.high-contrast .toolkit-nav-link.active,
+body.high-contrast .toolkit-nav-link:hover,
+body.high-contrast .toolkit-nav-link:focus-visible,
+body.high-contrast .value-choice.active,
+body.high-contrast .value-choice:hover,
+body.high-contrast .value-choice:focus-visible,
+body.high-contrast .hc-toggle-link.active,
+body.high-contrast .hc-toggle-link:hover,
+body.high-contrast .hc-toggle-link:focus-visible {
+    border-bottom-color: #000000 !important;
+}
+
+body.high-contrast h3,
+body.high-contrast .completion-card h4,
+body.high-contrast .recipe-card h4,
+body.high-contrast .potion-group-title,
+body.high-contrast .completion-region-footer,
+body.high-contrast .completer-tally,
+body.high-contrast .control-group label {
+    color: #003f73 !important;
+    border-color: #003f73 !important;
+}
+
+body.high-contrast .primary-action-button,
+body.high-contrast button.primary-action-button {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+body.high-contrast .primary-action-button:hover,
+body.high-contrast .primary-action-button:focus-visible {
+    background-color: #eeeeee !important;
+}
+
+body.high-contrast .ingredient-button,
+body.high-contrast .control-group select,
+body.high-contrast .foraging-controls input,
+body.high-contrast .recipe-card,
+body.high-contrast .completion-card,
+body.high-contrast .potion-group-card,
+body.high-contrast .foraging-debug {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: inset 0 0 0 2px #000000 !important;
+    border-color: #000000 !important;
+}
+
+body.high-contrast .ingredient-button.selected.common,
+body.high-contrast .ingredient.common,
+body.high-contrast .recipe-subcard .ingredient.common {
+    background-color: #2f6f22 !important;
+    color: #ffffff !important;
+}
+
+body.high-contrast .ingredient-button.selected.uncommon,
+body.high-contrast .ingredient.uncommon,
+body.high-contrast .recipe-subcard .ingredient.uncommon {
+    background-color: #ffe45c !important;
+    color: #111111 !important;
+}
+
+body.high-contrast .ingredient-button.selected.rare,
+body.high-contrast .ingredient.rare,
+body.high-contrast .recipe-subcard .ingredient.rare {
+    background-color: #a8321f !important;
+    color: #ffffff !important;
+}
+
+/* Main nav: when hovering a tab, move the underline there rather than showing two. */
+.toolkit-nav.has-hover .toolkit-nav-link.active {
+    border-bottom-color: transparent !important;
+}
+
+.toolkit-nav.has-hover .toolkit-nav-link.hover-active {
+    border-bottom-color: #DCA453 !important;
+}
+
+body.high-contrast .toolkit-nav.has-hover .toolkit-nav-link.hover-active {
+    border-bottom-color: #000000 !important;
+}
+
+/* Recipe dropdown summary: text left, +/- at far right. */
+.potion-group-card summary {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+}
+
+.potion-group-card summary::before {
+    order: 2 !important;
+    width: auto !important;
+    margin: 0 0 0 12px !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    flex: 0 0 auto !important;
+}
+
+.potion-group-summary-text {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+}
+
+.potion-group-count {
+    font-size: 14px !important;
+}
+
+
+/* ==========================================================
+   Active underline hover correction
+   ========================================================== */
+
+/* Default active states stay underlined. */
+.value-choice.active,
+.hc-toggle-link.active,
+.toolkit-nav-link.active {
+    border-bottom-color: #DCA453 !important;
+}
+
+body.high-contrast .value-choice.active,
+body.high-contrast .hc-toggle-link.active,
+body.high-contrast .toolkit-nav-link.active {
+    border-bottom-color: #000000 !important;
+}
+
+/* Suppress the active underline only when a different option is being hovered/focused. */
+.values-control.has-hover .value-choice.active:not(.hover-active),
+.contrast-control.has-hover .hc-toggle-link.active:not(.hover-active),
+.toolkit-nav.has-hover .toolkit-nav-link.active:not(.hover-active) {
+    border-bottom-color: transparent !important;
+}
+
+/* The alternate hovered/focused option gets the underline. */
+.values-control.has-hover .value-choice.hover-active,
+.contrast-control.has-hover .hc-toggle-link.hover-active,
+.toolkit-nav.has-hover .toolkit-nav-link.hover-active {
+    border-bottom-color: #DCA453 !important;
+}
+
+body.high-contrast .values-control.has-hover .value-choice.hover-active,
+body.high-contrast .contrast-control.has-hover .hc-toggle-link.hover-active,
+body.high-contrast .toolkit-nav.has-hover .toolkit-nav-link.hover-active {
+    border-bottom-color: #000000 !important;
+}
+
+
+/* ==========================================================
+   Restore HC toggle + fix Settings/Values hover behavior
+   ========================================================== */
+
+/* HC is a single understated text control again. */
+.contrast-control {
+    min-height: 18px !important;
+}
+
+.contrast-toggle-button,
+button.contrast-toggle-button,
+.utility-link.contrast-toggle-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    display: inline-block !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 2px solid transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 0 2px 0 !important;
+    margin: 0 !important;
+    font: inherit !important;
+    line-height: 1.1 !important;
+    color: #2d2d2d !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+.contrast-toggle-button:hover,
+.contrast-toggle-button:focus-visible {
+    border-bottom-color: #DCA453 !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+body.high-contrast .contrast-toggle-button,
+body.high-contrast button.contrast-toggle-button,
+body.high-contrast .utility-link.contrast-toggle-button {
+    color: #000000 !important;
+    border-bottom-color: #000000 !important;
+}
+
+/* Values/settings underline should move only when hovering a different option. */
+.values-control .value-choice {
+    border-bottom: 2px solid transparent !important;
+    padding-bottom: 2px !important;
+}
+
+.values-control .value-choice.active {
+    border-bottom-color: #DCA453 !important;
+}
+
+.values-control.has-hover .value-choice.active:not(.hover-active) {
+    border-bottom-color: transparent !important;
+}
+
+.values-control.has-hover .value-choice.hover-active {
+    border-bottom-color: #DCA453 !important;
+}
+
+body.high-contrast .values-control .value-choice.active,
+body.high-contrast .values-control.has-hover .value-choice.hover-active {
+    border-bottom-color: #000000 !important;
+}
+
+/* Remove stale ON/OFF rules from affecting anything if cached markup exists. */
+.hc-on,
+.hc-off,
+.hc-state,
+.hc-toggle-link {
+    text-decoration: none !important;
+}
+
+/* Make the HC mode unmistakable and keep it higher priority than colorful overrides. */
+body.high-contrast {
+    background-color: #111111 !important;
+    color: #000000 !important;
+}
+
+body.high-contrast .container {
+    background-color: #ffffff !important;
+    border-color: #000000 !important;
+    box-shadow: 0 0 0 3px #000000 !important;
+}
+
+body.high-contrast .utility-heading,
+body.high-contrast .utility-link,
+body.high-contrast a.utility-link,
+body.high-contrast button.utility-link,
+body.high-contrast .value-choice,
+body.high-contrast .inventory-profile,
+body.high-contrast .inventory-profile em,
+body.high-contrast .toolkit-nav-link,
+body.high-contrast .tool-description,
+body.high-contrast .site-footer,
+body.high-contrast .site-footer a {
+    color: #000000 !important;
+}
+
+body.high-contrast h1 {
+    color: #8a4b00 !important;
+}
+
+body.high-contrast .recipe-card,
+body.high-contrast .completion-card,
+body.high-contrast .potion-group-card,
+body.high-contrast .ingredient-button,
+body.high-contrast .control-group select,
+body.high-contrast .foraging-controls input {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+    box-shadow: inset 0 0 0 2px #000000 !important;
+}
+
+body.high-contrast .ingredient-button.selected.common,
+body.high-contrast .ingredient.common,
+body.high-contrast .recipe-subcard .ingredient.common {
+    background-color: #2f6f22 !important;
+    color: #ffffff !important;
+}
+
+body.high-contrast .ingredient-button.selected.uncommon,
+body.high-contrast .ingredient.uncommon,
+body.high-contrast .recipe-subcard .ingredient.uncommon {
+    background-color: #ffe45c !important;
+    color: #111111 !important;
+}
+
+body.high-contrast .ingredient-button.selected.rare,
+body.high-contrast .ingredient.rare,
+body.high-contrast .recipe-subcard .ingredient.rare {
+    background-color: #a8321f !important;
+    color: #ffffff !important;
+}
+
+
+/* ==========================================================
+   Recipe dropdown alignment fix
+   ========================================================== */
+
+/* Make the summary a true two-column row:
+   left = potion title/count, right = +/-. */
+.potion-group-card summary {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    column-gap: 16px !important;
+    padding: 12px 14px !important;
+}
+
+.potion-group-card summary::before {
+    content: "+" !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    order: initial !important;
+    width: auto !important;
+    min-width: 18px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+}
+
+.potion-group-card[open] summary::before {
+    content: "–" !important;
+}
+
+.potion-group-summary-text {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+    display: block !important;
+}
+
+.potion-group-title {
+    display: block !important;
+}
+
+.potion-group-count {
+    display: block !important;
+    margin-top: 5px !important;
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+    color: #555555 !important;
+}
+
+body.high-contrast .potion-group-count {
+    color: #000000 !important;
+}
+
+
+/* Restore blue framing around the application */
+html,
+body{
+    min-height:100%;
+}
+
+body{
+    background:#65ADE8 !important;
+    padding:18px 0 26px !important;
+}
+
+.container{
+    width:86% !important;
+    max-width:1100px !important;
+    margin:18px auto 26px !important;
+    border-radius:10px !important;
+}
+
+@media (max-width:800px){
+    body{
+        padding:12px 0 18px !important;
+    }
+
+    .container{
+        width:94% !important;
+        margin:12px auto 18px !important;
+    }
+}
+
+
+/* ==========================================================
+   FINAL HARD FIX: blue frame + ON/OFF high contrast
+   ========================================================== */
+
+/* Blue frame around the cream app panel. */
+html {
+    min-height: 100% !important;
+    background: #65ADE8 !important;
+}
+
+body {
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 60px 0 60px !important;
+    background: #65ADE8 !important;
+}
+
+body:not(.high-contrast) .container {
+    width: 86% !important;
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 34px 40px 42px !important;
+    background: #fffadb !important;
+    border: 1px solid rgba(87, 125, 161, 0.35) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10) !important;
+}
+
+/* ON/OFF HC control. */
+.contrast-control {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 10px !important;
+}
+
+.contrast-icon {
+    display: inline-block !important;
+    color: #2d2d2d !important;
+    border-bottom: 2px solid transparent !important;
+    padding-bottom: 2px !important;
+    line-height: 1.1 !important;
+}
+
+.hc-toggle-link {
+    display: inline-block !important;
+    color: #2d2d2d !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 2px solid transparent !important;
+    padding: 0 0 2px 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    line-height: 1.1 !important;
+}
+
+.hc-toggle-link.active,
+.hc-toggle-link:hover,
+.hc-toggle-link:focus-visible,
+.contrast-control.has-hover .hc-toggle-link.hover-active {
+    border-bottom-color: #DCA453 !important;
+    text-decoration: none !important;
+}
+
+.contrast-control.has-hover .hc-toggle-link.active:not(.hover-active) {
+    border-bottom-color: transparent !important;
+}
+
+/* Actual high contrast state. This must override all colorful rules. */
+html:has(body.high-contrast) {
+    background: #111111 !important;
+}
+
+body.high-contrast {
+    background: #111111 !important;
+    color: #000000 !important;
+}
+
+body.high-contrast .container {
+    width: 86% !important;
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 34px 40px 42px !important;
+    background: #ffffff !important;
+    border: 3px solid #000000 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+}
+
+body.high-contrast h1 {
+    color: #000000 !important;
+}
+
+body.high-contrast .utility-heading,
+body.high-contrast .utility-link,
+body.high-contrast a.utility-link,
+body.high-contrast button.utility-link,
+body.high-contrast .value-choice,
+body.high-contrast .hc-toggle-link,
+body.high-contrast .contrast-icon,
+body.high-contrast .inventory-profile,
+body.high-contrast .inventory-profile em,
+body.high-contrast .toolkit-nav-link,
+body.high-contrast .tool-description,
+body.high-contrast .site-footer,
+body.high-contrast .site-footer a,
+body.high-contrast .completer-intro,
+body.high-contrast .completer-empty,
+body.high-contrast .checkbox-option,
+body.high-contrast .potion-group-count {
+    color: #000000 !important;
+}
+
+body.high-contrast .toolkit-nav-link.active,
+body.high-contrast .toolkit-nav-link:hover,
+body.high-contrast .toolkit-nav-link:focus-visible,
+body.high-contrast .toolkit-nav.has-hover .toolkit-nav-link.hover-active,
+body.high-contrast .value-choice.active,
+body.high-contrast .value-choice:hover,
+body.high-contrast .value-choice:focus-visible,
+body.high-contrast .values-control.has-hover .value-choice.hover-active,
+body.high-contrast .hc-toggle-link.active,
+body.high-contrast .hc-toggle-link:hover,
+body.high-contrast .hc-toggle-link:focus-visible,
+body.high-contrast .contrast-control.has-hover .hc-toggle-link.hover-active {
+    border-bottom-color: #000000 !important;
+}
+
+body.high-contrast .toolkit-nav.has-hover .toolkit-nav-link.active:not(.hover-active),
+body.high-contrast .values-control.has-hover .value-choice.active:not(.hover-active),
+body.high-contrast .contrast-control.has-hover .hc-toggle-link.active:not(.hover-active) {
+    border-bottom-color: transparent !important;
+}
+
+body.high-contrast h3,
+body.high-contrast .completion-card h4,
+body.high-contrast .recipe-card h4,
+body.high-contrast .potion-group-title,
+body.high-contrast .completion-region-footer,
+body.high-contrast .completer-tally,
+body.high-contrast .control-group label {
+    color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+body.high-contrast .primary-action-button,
+body.high-contrast button.primary-action-button {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+}
+
+body.high-contrast .primary-action-button:hover,
+body.high-contrast .primary-action-button:focus-visible {
+    background: #eeeeee !important;
+}
+
+body.high-contrast .ingredient-button,
+body.high-contrast .control-group select,
+body.high-contrast .foraging-controls input,
+body.high-contrast .recipe-card,
+body.high-contrast .completion-card,
+body.high-contrast .potion-group-card,
+body.high-contrast .foraging-debug {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+    box-shadow: inset 0 0 0 2px #000000 !important;
+}
+
+body.high-contrast .ingredient-button.selected.common,
+body.high-contrast .ingredient.common,
+body.high-contrast .recipe-subcard .ingredient.common {
+    background: #2f6f22 !important;
+    color: #ffffff !important;
+}
+
+body.high-contrast .ingredient-button.selected.uncommon,
+body.high-contrast .ingredient.uncommon,
+body.high-contrast .recipe-subcard .ingredient.uncommon {
+    background: #ffe45c !important;
+    color: #000000 !important;
+}
+
+body.high-contrast .ingredient-button.selected.rare,
+body.high-contrast .ingredient.rare,
+body.high-contrast .recipe-subcard .ingredient.rare {
+    background: #a8321f !important;
+    color: #ffffff !important;
+}
+
+@media (max-width: 800px) {
+    body {
+        padding: 24px 0 30px !important;
+    }
+
+    body:not(.high-contrast) .container,
+    body.high-contrast .container {
+        width: 94% !important;
+        padding: 22px 18px 30px !important;
+    }
+}
+
+
+/* Final viewport background fix */
+html,
+body{
+    background:#65ADE8 !important;
+    min-height:100vh !important;
+}
+
+
+/* Foraging debug readability */
+.foraging-debug h4 {
+    margin: 12px 0 6px;
+    color: #577da1;
+    font-size: 14px;
+}
+
+.foraging-debug ul {
+    margin: 6px 0 0 0;
+    padding-left: 18px;
+}
+
+.foraging-debug li {
+    margin: 4px 0;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+
+/* Plain-language Foraging Aid debug output */
+.foraging-debug {
+    text-align: left;
+}
+
+.foraging-debug-section {
+    margin-top: 14px;
+}
+
+.foraging-debug h4 {
+    margin: 12px 0 6px;
+    color: #577da1;
+    font-size: 15px;
+}
+
+.foraging-debug-item {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(87, 125, 161, 0.22);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin: 8px 0;
+}
+
+.foraging-debug-item h5 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    color: #2d2d2d;
+}
+
+.foraging-debug ul {
+    margin: 6px 0 0;
+    padding-left: 20px;
+}
+
+.foraging-debug li {
+    margin: 3px 0;
+    line-height: 1.35;
+}
+
+body.high-contrast .foraging-debug-item {
+    background: #ffffff !important;
+    border-color: #000000 !important;
+}
+
+body.high-contrast .foraging-debug h4,
+body.high-contrast .foraging-debug-item h5 {
+    color: #000000 !important;
+}
+
+
+/* Foraging Engine 2 debug polish */
+.foraging-debug {
+    text-align: left;
+}
+
+.foraging-debug-section {
+    margin-top: 14px;
+}
+
+.foraging-debug h4 {
+    margin: 12px 0 6px;
+    color: #577da1;
+    font-size: 15px;
+}
+
+.foraging-debug-item {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(87, 125, 161, 0.22);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin: 8px 0;
+}
+
+.foraging-debug-item h5 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    color: #2d2d2d;
+}
+
+.foraging-debug ul {
+    margin: 6px 0 0;
+    padding-left: 20px;
+}
+
+.foraging-debug li {
+    margin: 3px 0;
+    line-height: 1.35;
+}
+
+body.high-contrast .foraging-debug-item {
+    background: #ffffff !important;
+    border-color: #000000 !important;
+}
+
+body.high-contrast .foraging-debug h4,
+body.high-contrast .foraging-debug-item h5 {
+    color: #000000 !important;
+}
+
+
+/* Plain-text Foraging Aid debug output */
+.foraging-debug-plain {
+    text-align: left !important;
+}
+
+.foraging-debug-plain pre {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-x: auto !important;
+    margin: 12px 0 0 !important;
+    padding: 12px 14px !important;
+    background: rgba(255, 255, 255, 0.55) !important;
+    border: 1px solid rgba(87, 125, 161, 0.25) !important;
+    border-radius: 6px !important;
+    color: #2d2d2d !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+}
+
+body.high-contrast .foraging-debug-plain pre {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+
+/* Plain-text Foraging Aid debug output */
+.foraging-debug-plain {
+    text-align: left !important;
+}
+
+.foraging-debug-plain pre {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-x: auto !important;
+    margin: 12px 0 0 !important;
+    padding: 12px 14px !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: #2d2d2d !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+}
+
+body.high-contrast .foraging-debug-plain pre {
+    background: transparent !important;
+    color: #000000 !important;
+    border: 0 !important;
+}
+
+
+/* Prevent high-contrast container border from changing layout */
+.container {
+    box-sizing: border-box !important;
+}
+
+body.high-contrast .container {
+    border-width: 1px !important;
+    outline: 3px solid #000000 !important;
+    outline-offset: 0 !important;
+}
+
+
+/* Persistent plain-text debug details */
+.foraging-debug-plain {
+    margin-top: 16px !important;
+}
+
+.foraging-debug-plain summary {
+    cursor: pointer !important;
+    user-select: none !important;
+}
+
+
+
+
+/* Unified ingredient cards */
+.ingredient,
+.foraging-result-list .ingredient {
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 12px 14px !important;
+    margin: 0 !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+.foraging-result-list {
+    display: grid !important;
+    grid-template-columns: minmax(0, 272px) !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 22px auto 24px !important;
+}
+
+.foraging-result-card {
+    text-align: center !important;
+}
+
+.foraging-result-card .foraging-result-actions {
+    margin-top: 18px !important;
+}
+
+
+/* Foraging Add-to-Inventory completed state */
+.add-to-inventory-button.added,
+.add-to-inventory-button.added:disabled {
+    background: #7fbf6a !important;
+    border-color: #7fbf6a !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    cursor: default !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.add-to-inventory-button.added:hover,
+.add-to-inventory-button.added:disabled:hover {
+    background: #7fbf6a !important;
+    border-color: #7fbf6a !important;
+    color: #ffffff !important;
+    cursor: default !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+
+/* Foraging Compare Random */
+.foraging-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    align-items: start;
+    margin: 18px auto 22px;
+}
+
+.foraging-comparison-column h4 {
+    margin: 0 0 12px;
+    color: #577da1;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.foraging-comparison-column .foraging-result-list {
+    margin-top: 0 !important;
+}
+
+@media (max-width: 760px) {
+    .foraging-comparison {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Compare Random visibility toggle */
+.foraging-comparison {
+    display: grid;
+    grid-template-columns: minmax(0, 272px);
+    justify-content: center;
+    gap: 24px;
+    align-items: start;
+    margin: 18px auto 22px;
+}
+
+.foraging-comparison.show-random {
+    grid-template-columns: repeat(2, minmax(0, 272px));
+}
+
+.foraging-comparison-column h4 {
+    margin: 0 0 12px;
+    color: #577da1;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.foraging-comparison-random-column[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 760px) {
+    .foraging-comparison,
+    .foraging-comparison.show-random {
+        grid-template-columns: minmax(0, 272px);
+    }
+}
+
+/* Developer mode: toggle with Control + Option/Alt + Shift + O. */
+.developer-only-control,
+.developer-only-output,
+.developer-mode-badge {
+    display: none !important;
+}
+
+body.developer-mode .developer-only-control {
+    display: flex !important;
+}
+
+body.developer-mode .developer-only-output {
+    display: block !important;
+}
+
+body.developer-mode .developer-mode-badge {
+    display: block !important;
+    width: fit-content;
+    margin: 12px auto 0;
+    padding: 4px 9px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   0.9.1 layout refinements
+   ========================================================== */
+
+/* Keep the ingredient lists close to their column headings. */
+.ingredient-columns .column > h3 {
+    margin-bottom: 8px !important;
+}
+
+/* Developer-mode status belongs in the utility bar. */
+.app-utility-bar {
+    position: relative;
+}
+
+.developer-mode-badge {
+    align-self: flex-start;
+    flex: 0 0 auto;
+}
+
+body.developer-mode .developer-mode-badge {
+    display: block !important;
+    width: fit-content;
+    margin: 0 auto !important;
+    padding: 4px 9px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-family: var(--body-font);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Keep both foraging options together and let them wrap naturally. */
+.foraging-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 20px;
+    margin: 8px 0 32px 0 !important;
+}
+
+.foraging-options .checkbox-option {
+    margin: 0 !important;
+}
+
+/* Make the result area the visual focus in normal mode. */
+#foraging-results .foraging-result-card {
+    width: min(80%, 900px) !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+}
+
+/* Expand rather than compress when the random comparison is enabled. */
+#foraging-results .foraging-result-card.compare-random-active {
+    width: min(96%, 1200px) !important;
+    max-width: 1200px !important;
+}
+
+.foraging-comparison {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) !important;
+    justify-content: stretch !important;
+}
+
+.foraging-comparison.show-random {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.foraging-comparison-column {
+    min-width: 0;
+}
+
+.foraging-comparison-column .foraging-result-list {
+    width: 100%;
+    max-width: 520px;
+}
+
+@media (max-width: 760px) {
+    .app-utility-bar {
+        flex-wrap: wrap;
+        justify-content: center !important;
+    }
+
+    .developer-mode-badge {
+        order: 3;
+        width: 100%;
+    }
+
+    body.developer-mode .developer-mode-badge {
+        margin: 4px auto 0 !important;
+    }
+
+    #foraging-results .foraging-result-card,
+    #foraging-results .foraging-result-card.compare-random-active {
+        width: 100% !important;
+    }
+
+    .foraging-comparison,
+    .foraging-comparison.show-random {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+}
+
+
+/* ==========================================================
+   0.9.2 utility-bar alignment and footer attribution
+   ========================================================== */
+
+/* Center the Developer Mode badge within the full container,
+   independent of the widths of the left and right utility groups. */
+.app-utility-bar.developer-utility-bar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: start;
+    width: 100%;
+}
+
+.app-utility-bar.developer-utility-bar .inventory-strip {
+    justify-self: start;
+}
+
+.app-utility-bar.developer-utility-bar .developer-mode-badge {
+    justify-self: center;
+    align-self: start;
+}
+
+.app-utility-bar.developer-utility-bar .preference-strip {
+    justify-self: end;
+}
+
+@media (max-width: 760px) {
+    .app-utility-bar.developer-utility-bar {
+        grid-template-columns: 1fr auto;
+        row-gap: 8px;
+    }
+
+    .app-utility-bar.developer-utility-bar .inventory-strip {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .app-utility-bar.developer-utility-bar .preference-strip {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .app-utility-bar.developer-utility-bar .developer-mode-badge {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: center;
+        width: fit-content;
+    }
+}
+
+
+/* ==========================================================
+   0.9.3 stable developer utility layout
+   ========================================================== */
+/* Keep the center grid item present at all times so the right-side
+   preferences do not move when Developer Mode is toggled. */
+.app-utility-bar.developer-utility-bar .developer-mode-badge {
+    display: block !important;
+    visibility: hidden;
+    margin: 0 auto !important;
+    width: fit-content;
+    pointer-events: none;
+}
+
+body.developer-mode .app-utility-bar.developer-utility-bar .developer-mode-badge {
+    display: block !important;
+    visibility: visible;
+}
+
+/* ==========================================================
+   OPA Workbench — Phase 1 inventory screen
+   ========================================================== */
+.utility-heading-link {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.utility-heading-link:hover,
+.utility-heading-link:focus-visible,
+.utility-heading-link.active {
+    text-decoration: underline;
+}
+
+.inventory-page {
+    width: min(1400px, 100%);
+    margin: 36px auto 0;
+}
+
+.inventory-section {
+    margin: 0 0 54px;
+}
+
+.inventory-section-heading-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid var(--ui-line, #111111);
+    padding-bottom: 10px;
+}
+
+.inventory-section-heading-row h2 {
+    margin: 0;
+}
+
+.inventory-section-count {
+    margin: 6px 0 0;
+    color: var(--ui-muted, #555555);
+    font-size: 13px;
+    text-align: right;
+}
+
+.inventory-filter-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.potion-inventory-columns,
+.ingredient-inventory-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    align-items: start;
+}
+
+.inventory-category h3 {
+    margin: 0 0 8px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--ui-line, #111111);
+    font-size: 19px;
+    text-align: left;
+}
+
+.inventory-compact-list {
+    display: grid;
+    gap: 0;
+}
+
+.inventory-compact-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    min-height: 42px;
+    padding: 6px 0;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.inventory-compact-row.is-owned {
+    font-weight: 700;
+}
+
+.inventory-compact-name {
+    min-width: 0;
+    font-size: 14px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.inventory-inline-controls {
+    display: grid;
+    grid-template-columns: 26px 32px 26px;
+    align-items: center;
+    gap: 3px;
+}
+
+.inventory-inline-button {
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 1px solid var(--ui-line, #111111);
+    border-radius: 3px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.inventory-inline-button:hover,
+.inventory-inline-button:focus-visible {
+    background: #eeeeee;
+}
+
+.inventory-inline-button:disabled {
+    cursor: default;
+    opacity: .3;
+}
+
+.inventory-inline-count {
+    min-width: 32px;
+    text-align: center;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.inventory-category-empty,
+.inventory-empty-message,
+.inventory-page-error {
+    margin: 14px 0;
+    color: var(--ui-muted, #555555);
+    font-size: 14px;
+}
+
+.inventory-empty-message,
+.inventory-page-error {
+    text-align: center;
+}
+
+body.high-contrast .inventory-compact-row,
+body.high-contrast .inventory-category h3,
+body.high-contrast .inventory-section-heading-row {
+    border-color: #000000;
+}
+
+body.high-contrast .inventory-inline-button {
+    border-color: #000000;
+    background: #ffffff;
+    color: #000000;
+}
+
+@media (max-width: 900px) {
+    .potion-inventory-columns,
+    .ingredient-inventory-columns {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .inventory-section-heading-row {
+        display: block;
+    }
+
+    .inventory-section-count {
+        text-align: left;
+    }
+
+    .inventory-compact-row {
+        gap: 8px;
+    }
+}

@@ -1,0 +1,216 @@
+{
+  "engineVersion": "2.3",
+  "dcTiers": [
+    {
+      "min": 10,
+      "max": 15,
+      "key": "10-15",
+      "summary": "Common ingredients native to the area"
+    },
+    {
+      "min": 16,
+      "max": 20,
+      "key": "16-20",
+      "summary": "Uncommon native ingredients and Common non-native ingredients"
+    },
+    {
+      "min": 21,
+      "max": 25,
+      "key": "21-25",
+      "summary": "Uncommon non-native ingredients"
+    }
+  ],
+  "dcModifiers": {
+    "10-15": {
+      "common": 1.0,
+      "uncommon": 0.0,
+      "native": 1.0,
+      "nearby": 0.0,
+      "far": 0.0
+    },
+    "16-20": {
+      "common": 1.0,
+      "uncommon": 0.2,
+      "native": 1.0,
+      "nearby": 0.55,
+      "far": 0.05
+    },
+    "21-25": {
+      "common": 1.0,
+      "uncommon": 0.55,
+      "native": 1.0,
+      "nearby": 0.85,
+      "far": 0.25
+    }
+  },
+  "findCountByDos": [
+    {
+      "min": 0,
+      "max": 4,
+      "counts": [
+        {
+          "count": 1,
+          "weight": 70
+        },
+        {
+          "count": 2,
+          "weight": 30
+        }
+      ]
+    },
+    {
+      "min": 5,
+      "max": 9,
+      "counts": [
+        {
+          "count": 2,
+          "weight": 50
+        },
+        {
+          "count": 3,
+          "weight": 50
+        }
+      ]
+    },
+    {
+      "min": 10,
+      "max": 999,
+      "counts": [
+        {
+          "count": 3,
+          "weight": 50
+        },
+        {
+          "count": 4,
+          "weight": 35
+        },
+        {
+          "count": 5,
+          "weight": 15
+        }
+      ]
+    }
+  ],
+  "rarityWeights": {
+    "common": 5,
+    "uncommon": 1
+  },
+  "regionWeights": {
+    "native": 1,
+    "nearby": 0.5,
+    "far": 0.2
+  },
+  "habitatWeights": {
+    "direct": 12,
+    "related": 5,
+    "none": 0.4
+  },
+  "dosModifiers": {
+    "modest": {
+      "uncommon": 1.0,
+      "nearby": 0.25,
+      "far": 0.05,
+      "nonHabitat": 0.45
+    },
+    "strong": {
+      "uncommon": 1.0,
+      "nearby": 0.65,
+      "far": 0.12,
+      "nonHabitat": 0.65
+    },
+    "exceptional": {
+      "uncommon": 1.0,
+      "nearby": 1.0,
+      "far": 0.35,
+      "nonHabitat": 0.85
+    }
+  },
+  "habitatTargetByCount": {
+    "1": 1,
+    "2": 2,
+    "3": 2,
+    "4": 3,
+    "5": 4
+  },
+  "surpriseRules": {
+    "enabled": true,
+    "maxPerHaul": 1,
+    "minimumFindCount": 2,
+    "chanceByDos": {
+      "modest": 0.08,
+      "strong": 0.14,
+      "exceptional": 0.22
+    },
+    "allowedHabitatFits": [
+      "related",
+      "none"
+    ],
+    "minimumWeightFraction": 0.03
+  },
+  "maxResults": 5,
+  "excludeRarity": [
+    "rare"
+  ],
+  "refinementCompatibility": {
+    "0": 1.0,
+    "0.5": 0.95,
+    "1": 0.8,
+    "1.5": 0.65,
+    "2": 0.45,
+    "2.5": 0.3,
+    "3": 0.18,
+    "3.5": 0.1,
+    "4": 0.05
+  },
+  "rarityCompositionRules": {
+    "10-15": {
+      "modest": {
+        "allowUncommon": false,
+        "maxUncommon": 0
+      },
+      "strong": {
+        "allowUncommon": false,
+        "maxUncommon": 0
+      },
+      "exceptional": {
+        "allowUncommon": true,
+        "maxUncommon": 1,
+        "chance": 0.18
+      }
+    },
+    "16-20": {
+      "modest": {
+        "allowUncommon": true,
+        "maxUncommon": 1,
+        "chance": 0.25
+      },
+      "strong": {
+        "allowUncommon": true,
+        "maxUncommon": 1,
+        "chance": 0.42
+      },
+      "exceptional": {
+        "allowUncommon": true,
+        "maxUncommon": 1,
+        "chance": 0.55
+      }
+    },
+    "21-25": {
+      "modest": {
+        "allowUncommon": true,
+        "maxUncommon": 1,
+        "chance": 0.5
+      },
+      "strong": {
+        "allowUncommon": true,
+        "maxUncommon": 2,
+        "chance": 0.65
+      },
+      "exceptional": {
+        "allowUncommon": true,
+        "maxUncommon": 2,
+        "chance": 0.75
+      }
+    }
+  }
+}

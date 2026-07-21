@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory | Obojima Potion Almanac</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://use.typekit.net/rke0sfx.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/analytics.js"></script>
+<script src="js/version.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#inventory-content">Skip to inventory</a>
+<div class="container">
+<header class="app-header">
+<div aria-label="Application utilities" class="app-utility-bar">
+<div class="inventory-strip">
+<div class="utility-line">
+<a aria-current="page" class="utility-heading utility-heading-link active" href="inventory.html">Inventory</a>
+<a class="utility-link" href="#" onclick="clearWorkbenchInventory(); return false;">Clear</a>
+<a class="utility-link save-inventory-button" href="#" onclick="exportWorkbenchInventory(); return false;">Save</a>
+<a class="utility-link" href="#" onclick="importWorkbenchInventory(); return false;">Load</a>
+</div>
+<div class="current-inventory-line">
+<span class="utility-heading small">Current</span>
+<span aria-live="polite" class="inventory-profile" id="inventory-profile"></span>
+</div>
+</div>
+<div class="preference-strip">
+<div class="values-control">
+<span class="utility-heading">Values</span>
+<a class="utility-link value-choice value-2024" data-year="2024" href="#" onclick="setValuesYearChoice('2024'); return false;">2024</a>
+<a class="utility-link value-choice value-2014" data-year="2014" href="#" onclick="setValuesYearChoice('2014'); return false;">2014</a>
+</div>
+<div class="contrast-control">
+<span aria-hidden="true" class="contrast-icon">◐</span>
+<a class="utility-link hc-toggle-link hc-on" href="#" onclick="setHighContrastChoice(true); return false;">ON</a>
+<a class="utility-link hc-toggle-link hc-off active" href="#" onclick="setHighContrastChoice(false); return false;">OFF</a>
+</div>
+</div>
+</div>
+<h1>Obojima Potion Almanac</h1>
+<nav aria-label="Toolkit navigation" class="toolkit-nav">
+<a class="toolkit-nav-link" href="index.html">Recipe Generator</a>
+<a class="toolkit-nav-link" href="ingredient-finder.html">Ingredient Finder</a>
+<a class="toolkit-nav-link" href="foraging-aid.html">Foraging Aid</a>
+<a aria-current="page" class="toolkit-nav-link active" href="inventory.html">Inventory</a>
+</nav>
+<p class="tool-description">Manage the ingredients and potions currently in your inventory</p>
+</header>
+
+<main class="inventory-page" id="inventory-content">
+<section aria-labelledby="potions-heading" class="inventory-section inventory-potions-section">
+<div class="inventory-section-heading-row">
+<h2 id="potions-heading">Potions</h2>
+<p aria-live="polite" class="inventory-section-count" id="potion-total"></p>
+</div>
+<div class="potion-inventory-columns" id="potion-inventory-columns">
+<section aria-labelledby="combat-potions-heading" class="inventory-category">
+<h3 id="combat-potions-heading">Combat</h3>
+<div class="inventory-compact-list" id="combat-potion-list"></div>
+</section>
+<section aria-labelledby="utility-potions-heading" class="inventory-category">
+<h3 id="utility-potions-heading">Utility</h3>
+<div class="inventory-compact-list" id="utility-potion-list"></div>
+</section>
+<section aria-labelledby="whimsy-potions-heading" class="inventory-category">
+<h3 id="whimsy-potions-heading">Whimsy</h3>
+<div class="inventory-compact-list" id="whimsy-potion-list"></div>
+</section>
+</div>
+</section>
+
+<section aria-labelledby="ingredients-heading" class="inventory-section inventory-ingredients-section">
+<div class="inventory-section-heading-row">
+<div>
+<h2 id="ingredients-heading">Ingredients</h2>
+<label class="inventory-filter-toggle">
+<input id="show-all-ingredients" type="checkbox"/>
+<span>Show all ingredients</span>
+</label>
+</div>
+<p aria-live="polite" class="inventory-section-count" id="ingredient-total"></p>
+</div>
+<div class="ingredient-inventory-columns" id="ingredient-inventory-columns">
+<section aria-labelledby="common-inventory-heading" class="inventory-category">
+<h3 id="common-inventory-heading">Common</h3>
+<div class="inventory-compact-list" id="common-inventory-list"></div>
+</section>
+<section aria-labelledby="uncommon-inventory-heading" class="inventory-category">
+<h3 id="uncommon-inventory-heading">Uncommon</h3>
+<div class="inventory-compact-list" id="uncommon-inventory-list"></div>
+</section>
+<section aria-labelledby="rare-inventory-heading" class="inventory-category">
+<h3 id="rare-inventory-heading">Rare</h3>
+<div class="inventory-compact-list" id="rare-inventory-list"></div>
+</section>
+</div>
+<p class="inventory-empty-message" id="ingredient-empty-message" hidden>No ingredients are currently in this inventory. Turn on “Show all ingredients” to add some.</p>
+</section>
+</main>
+
+<footer class="site-footer"><p>Version 0.10.0-workbench • Last Updated: 21 July 2026</p>
+<p>Obojima Potion Almanac is a free and unofficial companion tool for the Obojima potion brewing rules.</p>
+<p>Obojima and all related intellectual property are © 1985 Games. All rights reserved.</p>
+<p>Developed by Bill Hanscom (Urameshiya 👻)</p>
+<p><a href="mailto:urameshiya.ghost@gmail.com?subject=Obojima%20Potion%20Almanac%20Error&amp;body=Page:%20%0AWhat%20happened:%20%0AExpected%20behavior:%20%0ABrowser:%20">Report an Error</a></p>
+</footer>
+</div>
+<script src="js/common.js"></script>
+<script src="js/accessibility.js"></script>
+<script src="js/inventory.js"></script>
+</body>
+</html>

@@ -148,6 +148,8 @@ async function completeRecipe() {
     if (completeInventoryResults.length > 0) {
         renderCompleterResults({
             target_potion: Obojima.getPotionDisplayName(targetType, targetValue, potionNames),
+            target_type: targetType,
+            target_value: targetValue,
             already_complete: true,
             complete_recipes: completeInventoryResults,
             results: [],
@@ -260,10 +262,26 @@ function renderCompleterResults(data) {
             }).join("");
 
             card.innerHTML = `
-                <h4>Current Inventory Recipe</h4>
+                <div class="completion-card-heading-row">
+                    <h4>Current Inventory Recipe</h4>
+                    <button type="button" class="brew-recipe-button">Brew</button>
+                </div>
                 <p class="completion-meta">Recipe Total ${recipe.attribute_totals}</p>
                 <ul class="completion-recipe-list">${ingredientsList}</ul>
             `;
+
+            card.querySelector(".brew-recipe-button").addEventListener("click", () => {
+                Obojima.brewPotionRecipe({
+                    potionType: data.target_type || document.getElementById("target-potion-type").value,
+                    potionLabel: data.target_potion,
+                    ingredientNames: recipe.owned_ingredients.map(ingredient => ingredient.name),
+                    getInventory: () => selectedInventory,
+                    setInventory: setSelectedInventory,
+                    onChange: markInventoryChanged,
+                    onAfter: refreshCompleterResultsAfterBrew,
+                    onUndo: refreshCompleterResultsAfterBrew
+                });
+            });
 
             completeGrid.appendChild(card);
         });
@@ -326,6 +344,15 @@ function renderCompleterResults(data) {
 
     resultsDiv.appendChild(grid);
     resultsDiv.scrollIntoView({ behavior: "smooth" }, () => selectedInventory);
+}
+
+async function refreshCompleterResultsAfterBrew() {
+    Obojima.applyInventoryToButtons(selectedInventory);
+    if (selectedInventory.length >= 2) {
+        await completeRecipe();
+    } else {
+        document.getElementById("completer-results").innerHTML = "";
+    }
 }
 
 async function clearCompleterSelection() {

@@ -4439,3 +4439,37 @@ body.high-contrast .inventory-undo-banner-content {
     border-bottom: 0;
     text-decoration-thickness: 2px;
 }
+
+
+/* Workbench brewing controls */
+.recipe-subcard-heading-row,
+.completion-card-heading-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.recipe-subcard-heading-row h5,
+.completion-card-heading-row h4 {
+    margin: 0;
+}
+
+.brew-recipe-button {
+    flex: 0 0 auto;
+    border: 1px solid var(--blue, #4f7dad);
+    border-radius: 0.35rem;
+    background: transparent;
+    color: var(--blue, #4f7dad);
+    font: inherit;
+    font-size: 0.85rem;
+    line-height: 1;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+}
+
+.brew-recipe-button:hover,
+.brew-recipe-button:focus-visible {
+    background: var(--blue, #4f7dad);
+    color: #fff;
+}

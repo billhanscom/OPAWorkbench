@@ -1,4 +1,6 @@
 let selectedIngredients = Obojima.loadStoredInventory();
+let brewRecipeRegistry = new Map();
+let nextBrewRecipeId = 1;
 
 document.addEventListener("DOMContentLoaded", async () => {
     updateValuesToggleButton();
@@ -140,7 +142,20 @@ function renderGroupedPotionResults(type, recipes) {
                 return `<li class="ingredient ${rarityClass}">${Obojima.formatIngredientName(ing)}</li>`;
             }).join("");
 
-            return `<div class="recipe-subcard"><h5>${recipeHeading(recipe, index, shownRecipes)}</h5><ul>${ingredientsList}</ul></div>`;
+            const brewId = `brew-${nextBrewRecipeId++}`;
+            brewRecipeRegistry.set(brewId, {
+                potionType: type,
+                potionLabel: group.potionType,
+                ingredientNames: recipe.ingredients.map(ingredient => ingredient.name)
+            });
+
+            return `<div class="recipe-subcard">
+                <div class="recipe-subcard-heading-row">
+                    <h5>${recipeHeading(recipe, index, shownRecipes)}</h5>
+                    <button type="button" class="brew-recipe-button" data-brew-id="${brewId}">Brew</button>
+                </div>
+                <ul>${ingredientsList}</ul>
+            </div>`;
         }).join("");
 
         return `<details class="potion-group-card">
@@ -159,6 +174,8 @@ async function findRecipes() {
     const recipes = await getRecipesForSelection();
     const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "";
+    brewRecipeRegistry = new Map();
+    nextBrewRecipeId = 1;
 
     let recipeCount = 0;
     const potionNames = new Set();
@@ -191,7 +208,31 @@ async function findRecipes() {
         resultsDiv.appendChild(column);
     });
 
+    resultsDiv.querySelectorAll(".brew-recipe-button").forEach(button => {
+        button.addEventListener("click", () => {
+            const recipe = brewRecipeRegistry.get(button.dataset.brewId);
+            if (!recipe) return;
+            Obojima.brewPotionRecipe({
+                ...recipe,
+                getInventory: () => selectedIngredients,
+                setInventory: setSelectedIngredients,
+                onChange: markInventoryChanged,
+                onAfter: refreshRecipeResultsAfterBrew,
+                onUndo: refreshRecipeResultsAfterBrew
+            });
+        });
+    });
+
     resultsDiv.scrollIntoView({ behavior: "smooth" }, () => selectedIngredients);
+}
+
+async function refreshRecipeResultsAfterBrew() {
+    Obojima.applyInventoryToButtons(selectedIngredients);
+    if (selectedIngredients.length >= 3) {
+        await findRecipes();
+    } else {
+        document.getElementById("results").innerHTML = "";
+    }
 }
 
 async function clearSelection() {

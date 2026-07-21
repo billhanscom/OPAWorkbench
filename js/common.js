@@ -1493,6 +1493,80 @@ const Obojima = (() => {
         undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
     }
 
+
+    function brewPotionRecipe({
+        potionType,
+        potionLabel,
+        ingredientNames,
+        getInventory,
+        setInventory,
+        onChange,
+        onAfter,
+        onUndo
+    }) {
+        const inventory = normalizeInventoryList(
+            typeof getInventory === "function" ? getInventory() : loadStoredInventory()
+        );
+        const quantities = reconcileInventoryQuantities(inventory);
+        const requirements = {};
+
+        (ingredientNames || []).forEach(name => {
+            if (!name) return;
+            requirements[name] = (requirements[name] || 0) + 1;
+        });
+
+        const missing = Object.entries(requirements).filter(([name, needed]) => {
+            return Math.max(0, Math.floor(Number(quantities[name]) || 0)) < needed;
+        });
+
+        if (missing.length > 0) {
+            alert("This potion can no longer be brewed with the current inventory.");
+            if (typeof onAfter === "function") onAfter();
+            return false;
+        }
+
+        const previousInventory = inventory.slice();
+        const previousQuantities = { ...quantities };
+        const previousPotions = loadPotionInventory();
+        const nextQuantities = { ...quantities };
+
+        Object.entries(requirements).forEach(([name, needed]) => {
+            const next = Math.max(0, Math.floor(Number(nextQuantities[name]) || 0) - needed);
+            if (next > 0) nextQuantities[name] = next;
+            else delete nextQuantities[name];
+        });
+
+        const nextInventory = previousInventory.filter(name => Number(nextQuantities[name] || 0) > 0);
+        const potionNumber = extractNumber(potionLabel);
+        const potionKey = `${String(potionType || "").toLowerCase()}:${potionNumber}`;
+        const nextPotions = { ...previousPotions };
+        nextPotions[potionKey] = Math.max(0, Math.floor(Number(nextPotions[potionKey]) || 0)) + 1;
+
+        saveInventoryQuantities(nextQuantities);
+        if (typeof setInventory === "function") setInventory(nextInventory);
+        else saveStoredInventory(nextInventory);
+        savePotionInventory(nextPotions);
+        applyInventoryToButtons(nextInventory);
+        if (typeof onChange === "function") onChange();
+        if (typeof onAfter === "function") onAfter();
+
+        showUndoBanner({
+            message: `Brewed ${potionType} ${potionLabel}.`,
+            undo: () => {
+                saveInventoryQuantities(previousQuantities);
+                if (typeof setInventory === "function") setInventory(previousInventory);
+                else saveStoredInventory(previousInventory);
+                savePotionInventory(previousPotions);
+                applyInventoryToButtons(previousInventory);
+                if (typeof onChange === "function") onChange();
+                if (typeof onUndo === "function") onUndo();
+                else if (typeof onAfter === "function") onAfter();
+            }
+        });
+
+        return true;
+    }
+
     return {
         REGION_LIST: DEFAULT_REGION_LIST,
         getRegionList,
@@ -1532,6 +1606,7 @@ const Obojima = (() => {
         savePotionInventory,
         setPotionQuantity,
         incrementPotionQuantity,
+        brewPotionRecipe,
         openInventoryView,
         loadInventoryDisplayName,
         saveInventoryDisplayName,

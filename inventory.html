@@ -19,10 +19,11 @@
 <div aria-label="Application utilities" class="app-utility-bar">
 <div class="inventory-strip">
 <div class="utility-line">
-<a aria-current="page" class="utility-heading utility-heading-link active" href="inventory.html">Inventory</a>
+<span class="utility-heading">Inventory</span>
 <a class="utility-link" href="#" onclick="clearWorkbenchInventory(); return false;">Clear</a>
 <a class="utility-link save-inventory-button" href="#" onclick="exportWorkbenchInventory(); return false;">Save</a>
 <a class="utility-link" href="#" onclick="importWorkbenchInventory(); return false;">Load</a>
+<a aria-current="page" class="utility-link active" href="inventory.html">View</a>
 </div>
 <div class="current-inventory-line">
 <span class="utility-heading small">Current</span>
@@ -47,7 +48,6 @@
 <a class="toolkit-nav-link" href="index.html">Recipe Generator</a>
 <a class="toolkit-nav-link" href="ingredient-finder.html">Ingredient Finder</a>
 <a class="toolkit-nav-link" href="foraging-aid.html">Foraging Aid</a>
-<a aria-current="page" class="toolkit-nav-link active" href="inventory.html">Inventory</a>
 </nav>
 <p class="tool-description">Manage the ingredients and potions currently in your inventory</p>
 </header>
@@ -56,7 +56,10 @@
 <section aria-labelledby="potions-heading" class="inventory-section inventory-potions-section">
 <div class="inventory-section-heading-row">
 <h2 id="potions-heading">Potions</h2>
-<p aria-live="polite" class="inventory-section-count" id="potion-total"></p>
+<label class="inventory-filter-toggle">
+<input id="show-all-potions" type="checkbox"/>
+<span>Show all potions</span>
+</label>
 </div>
 <div class="potion-inventory-columns" id="potion-inventory-columns">
 <section aria-labelledby="combat-potions-heading" class="inventory-category">
@@ -76,14 +79,11 @@
 
 <section aria-labelledby="ingredients-heading" class="inventory-section inventory-ingredients-section">
 <div class="inventory-section-heading-row">
-<div>
 <h2 id="ingredients-heading">Ingredients</h2>
 <label class="inventory-filter-toggle">
 <input id="show-all-ingredients" type="checkbox"/>
 <span>Show all ingredients</span>
 </label>
-</div>
-<p aria-live="polite" class="inventory-section-count" id="ingredient-total"></p>
 </div>
 <div class="ingredient-inventory-columns" id="ingredient-inventory-columns">
 <section aria-labelledby="common-inventory-heading" class="inventory-category">
@@ -103,7 +103,7 @@
 </section>
 </main>
 
-<footer class="site-footer"><p>Version 0.10.0-workbench • Last Updated: 21 July 2026</p>
+<footer class="site-footer"><p>Version 0.10.1-workbench • Last Updated: 21 July 2026</p>
 <p>Obojima Potion Almanac is a free and unofficial companion tool for the Obojima potion brewing rules.</p>
 <p>Obojima and all related intellectual property are © 1985 Games. All rights reserved.</p>
 <p>Developed by Bill Hanscom (Urameshiya 👻)</p>

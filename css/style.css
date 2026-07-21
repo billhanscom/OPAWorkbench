@@ -4090,18 +4090,12 @@ body.developer-mode .app-utility-bar.developer-utility-bar .developer-mode-badge
     margin: 0;
 }
 
-.inventory-section-count {
-    margin: 6px 0 0;
-    color: var(--ui-muted, #555555);
-    font-size: 13px;
-    text-align: right;
-}
-
 .inventory-filter-toggle {
     display: inline-flex;
     align-items: center;
+    align-self: center;
     gap: 8px;
-    margin-top: 10px;
+    margin: 0;
     font-size: 14px;
     cursor: pointer;
 }
@@ -4137,7 +4131,7 @@ body.developer-mode .app-utility-bar.developer-utility-bar .developer-mode-badge
     border-bottom: 1px solid #e4e4e4;
 }
 
-.inventory-compact-row.is-owned {
+.inventory-compact-row.emphasize-owned {
     font-weight: 700;
 }
 
@@ -4222,14 +4216,75 @@ body.high-contrast .inventory-inline-button {
 
 @media (max-width: 600px) {
     .inventory-section-heading-row {
-        display: block;
-    }
-
-    .inventory-section-count {
-        text-align: left;
+        align-items: center;
+        gap: 12px;
     }
 
     .inventory-compact-row {
         gap: 8px;
+    }
+}
+
+
+/* Inventory action confirmation and undo */
+.inventory-undo-banner {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    z-index: 10000;
+    width: min(760px, calc(100% - 24px));
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.inventory-undo-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--ui-line, #111111);
+    border-radius: 5px;
+    background: var(--page-bg, #ffffff);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .18);
+    pointer-events: auto;
+}
+
+.inventory-undo-banner-message {
+    min-width: 0;
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.inventory-undo-banner-button {
+    appearance: none;
+    border: 0;
+    border-bottom: 1px solid currentColor;
+    padding: 2px 3px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+}
+
+.inventory-undo-banner-button:hover,
+.inventory-undo-banner-button:focus-visible {
+    border-bottom-width: 2px;
+}
+
+body.high-contrast .inventory-undo-banner-content {
+    border: 2px solid #000000;
+    background: #ffffff;
+    color: #000000;
+}
+
+@media (max-width: 600px) {
+    .inventory-undo-banner-content {
+        flex-wrap: wrap;
+    }
+
+    .inventory-undo-banner-message {
+        flex-basis: 100%;
     }
 }

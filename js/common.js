@@ -81,7 +81,72 @@ const Obojima = (() => {
         const values = ingredient.values || {};
         const selectedValues = values[selectedYear] || values["2024"] || values["2014"] || ingredient;
 
-        return {
+    
+    let activeUndoAction = null;
+    let undoBannerTimer = null;
+
+    function dismissUndoBanner() {
+        if (undoBannerTimer) {
+            window.clearTimeout(undoBannerTimer);
+            undoBannerTimer = null;
+        }
+        const banner = document.getElementById("inventory-undo-banner");
+        if (banner) banner.remove();
+        activeUndoAction = null;
+    }
+
+    function runActiveUndo() {
+        if (!activeUndoAction || typeof activeUndoAction.undo !== "function") return;
+        const action = activeUndoAction;
+        dismissUndoBanner();
+        action.undo();
+    }
+
+    function showUndoBanner({ message, undo, duration = 10000 }) {
+        dismissUndoBanner();
+        if (!message || typeof undo !== "function") return;
+
+        activeUndoAction = { undo };
+        const banner = document.createElement("div");
+        banner.id = "inventory-undo-banner";
+        banner.className = "inventory-undo-banner";
+        banner.setAttribute("role", "status");
+        banner.setAttribute("aria-live", "polite");
+
+        const content = document.createElement("div");
+        content.className = "inventory-undo-banner-content";
+
+        const text = document.createElement("span");
+        text.className = "inventory-undo-banner-message";
+        text.textContent = message;
+
+        const undoButton = document.createElement("button");
+        undoButton.type = "button";
+        undoButton.className = "inventory-undo-banner-button";
+        undoButton.textContent = "Undo";
+        undoButton.addEventListener("click", runActiveUndo);
+
+        const okButton = document.createElement("button");
+        okButton.type = "button";
+        okButton.className = "inventory-undo-banner-button";
+        okButton.textContent = "OK";
+        okButton.addEventListener("click", dismissUndoBanner);
+
+        content.append(text, undoButton, okButton);
+        banner.appendChild(content);
+        document.body.appendChild(banner);
+
+        undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
+    }
+
+    document.addEventListener("keydown", event => {
+        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
+        if (!isUndo || !activeUndoAction) return;
+        event.preventDefault();
+        runActiveUndo();
+    });
+
+    return {
             ...ingredient,
             combat: Number(selectedValues.combat || 0),
             utility: Number(selectedValues.utility || 0),
@@ -118,7 +183,72 @@ const Obojima = (() => {
     }
 
     function splitIngredientsByRarity(ingredients) {
-        return {
+    
+    let activeUndoAction = null;
+    let undoBannerTimer = null;
+
+    function dismissUndoBanner() {
+        if (undoBannerTimer) {
+            window.clearTimeout(undoBannerTimer);
+            undoBannerTimer = null;
+        }
+        const banner = document.getElementById("inventory-undo-banner");
+        if (banner) banner.remove();
+        activeUndoAction = null;
+    }
+
+    function runActiveUndo() {
+        if (!activeUndoAction || typeof activeUndoAction.undo !== "function") return;
+        const action = activeUndoAction;
+        dismissUndoBanner();
+        action.undo();
+    }
+
+    function showUndoBanner({ message, undo, duration = 10000 }) {
+        dismissUndoBanner();
+        if (!message || typeof undo !== "function") return;
+
+        activeUndoAction = { undo };
+        const banner = document.createElement("div");
+        banner.id = "inventory-undo-banner";
+        banner.className = "inventory-undo-banner";
+        banner.setAttribute("role", "status");
+        banner.setAttribute("aria-live", "polite");
+
+        const content = document.createElement("div");
+        content.className = "inventory-undo-banner-content";
+
+        const text = document.createElement("span");
+        text.className = "inventory-undo-banner-message";
+        text.textContent = message;
+
+        const undoButton = document.createElement("button");
+        undoButton.type = "button";
+        undoButton.className = "inventory-undo-banner-button";
+        undoButton.textContent = "Undo";
+        undoButton.addEventListener("click", runActiveUndo);
+
+        const okButton = document.createElement("button");
+        okButton.type = "button";
+        okButton.className = "inventory-undo-banner-button";
+        okButton.textContent = "OK";
+        okButton.addEventListener("click", dismissUndoBanner);
+
+        content.append(text, undoButton, okButton);
+        banner.appendChild(content);
+        document.body.appendChild(banner);
+
+        undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
+    }
+
+    document.addEventListener("keydown", event => {
+        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
+        if (!isUndo || !activeUndoAction) return;
+        event.preventDefault();
+        runActiveUndo();
+    });
+
+    return {
             common: ingredients.filter(ing => normalizeRarity(ing.rarity) === "common").sort((a, b) => ingredientSortKey(a).localeCompare(ingredientSortKey(b))),
             uncommon: ingredients.filter(ing => normalizeRarity(ing.rarity) === "uncommon").sort((a, b) => ingredientSortKey(a).localeCompare(ingredientSortKey(b))),
             rare: ingredients.filter(ing => normalizeRarity(ing.rarity) === "rare").sort((a, b) => ingredientSortKey(a).localeCompare(ingredientSortKey(b)))
@@ -196,7 +326,72 @@ const Obojima = (() => {
     }
 
     function serializeIngredient(ing) {
-        return {
+    
+    let activeUndoAction = null;
+    let undoBannerTimer = null;
+
+    function dismissUndoBanner() {
+        if (undoBannerTimer) {
+            window.clearTimeout(undoBannerTimer);
+            undoBannerTimer = null;
+        }
+        const banner = document.getElementById("inventory-undo-banner");
+        if (banner) banner.remove();
+        activeUndoAction = null;
+    }
+
+    function runActiveUndo() {
+        if (!activeUndoAction || typeof activeUndoAction.undo !== "function") return;
+        const action = activeUndoAction;
+        dismissUndoBanner();
+        action.undo();
+    }
+
+    function showUndoBanner({ message, undo, duration = 10000 }) {
+        dismissUndoBanner();
+        if (!message || typeof undo !== "function") return;
+
+        activeUndoAction = { undo };
+        const banner = document.createElement("div");
+        banner.id = "inventory-undo-banner";
+        banner.className = "inventory-undo-banner";
+        banner.setAttribute("role", "status");
+        banner.setAttribute("aria-live", "polite");
+
+        const content = document.createElement("div");
+        content.className = "inventory-undo-banner-content";
+
+        const text = document.createElement("span");
+        text.className = "inventory-undo-banner-message";
+        text.textContent = message;
+
+        const undoButton = document.createElement("button");
+        undoButton.type = "button";
+        undoButton.className = "inventory-undo-banner-button";
+        undoButton.textContent = "Undo";
+        undoButton.addEventListener("click", runActiveUndo);
+
+        const okButton = document.createElement("button");
+        okButton.type = "button";
+        okButton.className = "inventory-undo-banner-button";
+        okButton.textContent = "OK";
+        okButton.addEventListener("click", dismissUndoBanner);
+
+        content.append(text, undoButton, okButton);
+        banner.appendChild(content);
+        document.body.appendChild(banner);
+
+        undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
+    }
+
+    document.addEventListener("keydown", event => {
+        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
+        if (!isUndo || !activeUndoAction) return;
+        event.preventDefault();
+        runActiveUndo();
+    });
+
+    return {
             name: ing.name,
             rarity: normalizeRarity(ing.rarity),
             combat: ing.combat,
@@ -536,7 +731,72 @@ const Obojima = (() => {
     }
 
     function loadInventoryProfile() {
-        return {
+    
+    let activeUndoAction = null;
+    let undoBannerTimer = null;
+
+    function dismissUndoBanner() {
+        if (undoBannerTimer) {
+            window.clearTimeout(undoBannerTimer);
+            undoBannerTimer = null;
+        }
+        const banner = document.getElementById("inventory-undo-banner");
+        if (banner) banner.remove();
+        activeUndoAction = null;
+    }
+
+    function runActiveUndo() {
+        if (!activeUndoAction || typeof activeUndoAction.undo !== "function") return;
+        const action = activeUndoAction;
+        dismissUndoBanner();
+        action.undo();
+    }
+
+    function showUndoBanner({ message, undo, duration = 10000 }) {
+        dismissUndoBanner();
+        if (!message || typeof undo !== "function") return;
+
+        activeUndoAction = { undo };
+        const banner = document.createElement("div");
+        banner.id = "inventory-undo-banner";
+        banner.className = "inventory-undo-banner";
+        banner.setAttribute("role", "status");
+        banner.setAttribute("aria-live", "polite");
+
+        const content = document.createElement("div");
+        content.className = "inventory-undo-banner-content";
+
+        const text = document.createElement("span");
+        text.className = "inventory-undo-banner-message";
+        text.textContent = message;
+
+        const undoButton = document.createElement("button");
+        undoButton.type = "button";
+        undoButton.className = "inventory-undo-banner-button";
+        undoButton.textContent = "Undo";
+        undoButton.addEventListener("click", runActiveUndo);
+
+        const okButton = document.createElement("button");
+        okButton.type = "button";
+        okButton.className = "inventory-undo-banner-button";
+        okButton.textContent = "OK";
+        okButton.addEventListener("click", dismissUndoBanner);
+
+        content.append(text, undoButton, okButton);
+        banner.appendChild(content);
+        document.body.appendChild(banner);
+
+        undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
+    }
+
+    document.addEventListener("keydown", event => {
+        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
+        if (!isUndo || !activeUndoAction) return;
+        event.preventDefault();
+        runActiveUndo();
+    });
+
+    return {
             playerName: localStorage.getItem(OBOJIMA_PLAYER_NAME_KEY) || "",
             characterName: localStorage.getItem(OBOJIMA_CHARACTER_NAME_KEY) || ""
         };
@@ -562,7 +822,72 @@ const Obojima = (() => {
     }
     function getCanonicalInventoryState(items) {
         const profile = loadInventoryProfile();
-        return {
+    
+    let activeUndoAction = null;
+    let undoBannerTimer = null;
+
+    function dismissUndoBanner() {
+        if (undoBannerTimer) {
+            window.clearTimeout(undoBannerTimer);
+            undoBannerTimer = null;
+        }
+        const banner = document.getElementById("inventory-undo-banner");
+        if (banner) banner.remove();
+        activeUndoAction = null;
+    }
+
+    function runActiveUndo() {
+        if (!activeUndoAction || typeof activeUndoAction.undo !== "function") return;
+        const action = activeUndoAction;
+        dismissUndoBanner();
+        action.undo();
+    }
+
+    function showUndoBanner({ message, undo, duration = 10000 }) {
+        dismissUndoBanner();
+        if (!message || typeof undo !== "function") return;
+
+        activeUndoAction = { undo };
+        const banner = document.createElement("div");
+        banner.id = "inventory-undo-banner";
+        banner.className = "inventory-undo-banner";
+        banner.setAttribute("role", "status");
+        banner.setAttribute("aria-live", "polite");
+
+        const content = document.createElement("div");
+        content.className = "inventory-undo-banner-content";
+
+        const text = document.createElement("span");
+        text.className = "inventory-undo-banner-message";
+        text.textContent = message;
+
+        const undoButton = document.createElement("button");
+        undoButton.type = "button";
+        undoButton.className = "inventory-undo-banner-button";
+        undoButton.textContent = "Undo";
+        undoButton.addEventListener("click", runActiveUndo);
+
+        const okButton = document.createElement("button");
+        okButton.type = "button";
+        okButton.className = "inventory-undo-banner-button";
+        okButton.textContent = "OK";
+        okButton.addEventListener("click", dismissUndoBanner);
+
+        content.append(text, undoButton, okButton);
+        banner.appendChild(content);
+        document.body.appendChild(banner);
+
+        undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
+    }
+
+    document.addEventListener("keydown", event => {
+        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
+        if (!isUndo || !activeUndoAction) return;
+        event.preventDefault();
+        runActiveUndo();
+    });
+
+    return {
             version: 2,
             playerName: profile.playerName || "",
             characterName: profile.characterName || "",
@@ -755,7 +1080,72 @@ const Obojima = (() => {
 
     function buildInventoryExportPayload(items) {
         const profile = loadInventoryProfile();
-        return {
+    
+    let activeUndoAction = null;
+    let undoBannerTimer = null;
+
+    function dismissUndoBanner() {
+        if (undoBannerTimer) {
+            window.clearTimeout(undoBannerTimer);
+            undoBannerTimer = null;
+        }
+        const banner = document.getElementById("inventory-undo-banner");
+        if (banner) banner.remove();
+        activeUndoAction = null;
+    }
+
+    function runActiveUndo() {
+        if (!activeUndoAction || typeof activeUndoAction.undo !== "function") return;
+        const action = activeUndoAction;
+        dismissUndoBanner();
+        action.undo();
+    }
+
+    function showUndoBanner({ message, undo, duration = 10000 }) {
+        dismissUndoBanner();
+        if (!message || typeof undo !== "function") return;
+
+        activeUndoAction = { undo };
+        const banner = document.createElement("div");
+        banner.id = "inventory-undo-banner";
+        banner.className = "inventory-undo-banner";
+        banner.setAttribute("role", "status");
+        banner.setAttribute("aria-live", "polite");
+
+        const content = document.createElement("div");
+        content.className = "inventory-undo-banner-content";
+
+        const text = document.createElement("span");
+        text.className = "inventory-undo-banner-message";
+        text.textContent = message;
+
+        const undoButton = document.createElement("button");
+        undoButton.type = "button";
+        undoButton.className = "inventory-undo-banner-button";
+        undoButton.textContent = "Undo";
+        undoButton.addEventListener("click", runActiveUndo);
+
+        const okButton = document.createElement("button");
+        okButton.type = "button";
+        okButton.className = "inventory-undo-banner-button";
+        okButton.textContent = "OK";
+        okButton.addEventListener("click", dismissUndoBanner);
+
+        content.append(text, undoButton, okButton);
+        banner.appendChild(content);
+        document.body.appendChild(banner);
+
+        undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
+    }
+
+    document.addEventListener("keydown", event => {
+        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
+        if (!isUndo || !activeUndoAction) return;
+        event.preventDefault();
+        runActiveUndo();
+    });
+
+    return {
             app: "Obojima Potion Toolkit",
             version: 2,
             playerName: profile.playerName || "",
@@ -831,7 +1221,72 @@ const Obojima = (() => {
         const quantities = parsed && !Array.isArray(parsed) && parsed.quantities && typeof parsed.quantities === "object"
             ? parsed.quantities
             : {};
-        return {
+    
+    let activeUndoAction = null;
+    let undoBannerTimer = null;
+
+    function dismissUndoBanner() {
+        if (undoBannerTimer) {
+            window.clearTimeout(undoBannerTimer);
+            undoBannerTimer = null;
+        }
+        const banner = document.getElementById("inventory-undo-banner");
+        if (banner) banner.remove();
+        activeUndoAction = null;
+    }
+
+    function runActiveUndo() {
+        if (!activeUndoAction || typeof activeUndoAction.undo !== "function") return;
+        const action = activeUndoAction;
+        dismissUndoBanner();
+        action.undo();
+    }
+
+    function showUndoBanner({ message, undo, duration = 10000 }) {
+        dismissUndoBanner();
+        if (!message || typeof undo !== "function") return;
+
+        activeUndoAction = { undo };
+        const banner = document.createElement("div");
+        banner.id = "inventory-undo-banner";
+        banner.className = "inventory-undo-banner";
+        banner.setAttribute("role", "status");
+        banner.setAttribute("aria-live", "polite");
+
+        const content = document.createElement("div");
+        content.className = "inventory-undo-banner-content";
+
+        const text = document.createElement("span");
+        text.className = "inventory-undo-banner-message";
+        text.textContent = message;
+
+        const undoButton = document.createElement("button");
+        undoButton.type = "button";
+        undoButton.className = "inventory-undo-banner-button";
+        undoButton.textContent = "Undo";
+        undoButton.addEventListener("click", runActiveUndo);
+
+        const okButton = document.createElement("button");
+        okButton.type = "button";
+        okButton.className = "inventory-undo-banner-button";
+        okButton.textContent = "OK";
+        okButton.addEventListener("click", dismissUndoBanner);
+
+        content.append(text, undoButton, okButton);
+        banner.appendChild(content);
+        document.body.appendChild(banner);
+
+        undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
+    }
+
+    document.addEventListener("keydown", event => {
+        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
+        if (!isUndo || !activeUndoAction) return;
+        event.preventDefault();
+        runActiveUndo();
+    });
+
+    return {
             playerName: parsed && !Array.isArray(parsed) ? (parsed.playerName || "") : "",
             characterName: parsed && !Array.isArray(parsed) ? (parsed.characterName || "") : "",
             dataset: parsed && !Array.isArray(parsed) ? parsed.dataset : null,
@@ -906,6 +1361,71 @@ const Obojima = (() => {
         input.click();
     }
 
+
+    let activeUndoAction = null;
+    let undoBannerTimer = null;
+
+    function dismissUndoBanner() {
+        if (undoBannerTimer) {
+            window.clearTimeout(undoBannerTimer);
+            undoBannerTimer = null;
+        }
+        const banner = document.getElementById("inventory-undo-banner");
+        if (banner) banner.remove();
+        activeUndoAction = null;
+    }
+
+    function runActiveUndo() {
+        if (!activeUndoAction || typeof activeUndoAction.undo !== "function") return;
+        const action = activeUndoAction;
+        dismissUndoBanner();
+        action.undo();
+    }
+
+    function showUndoBanner({ message, undo, duration = 10000 }) {
+        dismissUndoBanner();
+        if (!message || typeof undo !== "function") return;
+
+        activeUndoAction = { undo };
+        const banner = document.createElement("div");
+        banner.id = "inventory-undo-banner";
+        banner.className = "inventory-undo-banner";
+        banner.setAttribute("role", "status");
+        banner.setAttribute("aria-live", "polite");
+
+        const content = document.createElement("div");
+        content.className = "inventory-undo-banner-content";
+
+        const text = document.createElement("span");
+        text.className = "inventory-undo-banner-message";
+        text.textContent = message;
+
+        const undoButton = document.createElement("button");
+        undoButton.type = "button";
+        undoButton.className = "inventory-undo-banner-button";
+        undoButton.textContent = "Undo";
+        undoButton.addEventListener("click", runActiveUndo);
+
+        const okButton = document.createElement("button");
+        okButton.type = "button";
+        okButton.className = "inventory-undo-banner-button";
+        okButton.textContent = "OK";
+        okButton.addEventListener("click", dismissUndoBanner);
+
+        content.append(text, undoButton, okButton);
+        banner.appendChild(content);
+        document.body.appendChild(banner);
+
+        undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
+    }
+
+    document.addEventListener("keydown", event => {
+        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
+        if (!isUndo || !activeUndoAction) return;
+        event.preventDefault();
+        runActiveUndo();
+    });
+
     return {
         REGION_LIST: DEFAULT_REGION_LIST,
         getRegionList,
@@ -947,6 +1467,8 @@ const Obojima = (() => {
         incrementPotionQuantity,
         openInventoryView,
         loadInventoryDisplayName,
-        saveInventoryDisplayName
+        saveInventoryDisplayName,
+        showUndoBanner,
+        dismissUndoBanner
     };
 })();

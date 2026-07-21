@@ -1066,7 +1066,18 @@ function addForagingResultsToInventory() {
     const latest = Array.isArray(window.latestForagingResults) ? window.latestForagingResults : [];
     if (latest.length === 0) return;
 
-    foragingInventory = Obojima.normalizeInventoryList(foragingInventory.concat(latest));
+    const previousInventory = Obojima.loadStoredInventory();
+    const previousQuantities = Obojima.loadInventoryQuantities();
+    const nextQuantities = { ...previousQuantities };
+    const nextInventorySet = new Set(previousInventory);
+
+    latest.forEach(name => {
+        nextInventorySet.add(name);
+        nextQuantities[name] = Math.max(0, Number(nextQuantities[name]) || 0) + 1;
+    });
+
+    foragingInventory = Obojima.normalizeInventoryList(Array.from(nextInventorySet));
+    Obojima.saveInventoryQuantities(nextQuantities);
     Obojima.saveStoredInventory(foragingInventory);
     Obojima.updateSaveInventoryButtons(foragingInventory);
 
@@ -1076,6 +1087,25 @@ function addForagingResultsToInventory() {
         button.disabled = true;
         button.classList.add("added");
     }
+
+    Obojima.showUndoBanner({
+        message: `Added ${latest.length} ingredient${latest.length === 1 ? "" : "s"} to inventory.`,
+        undo: () => {
+            foragingInventory = Obojima.normalizeInventoryList(previousInventory);
+            Obojima.saveInventoryQuantities(previousQuantities);
+            Obojima.saveStoredInventory(foragingInventory);
+            Obojima.updateSaveInventoryButtons(foragingInventory);
+            const currentButton = document.querySelector(".foraging-result-actions .add-to-inventory-button");
+            if (currentButton) {
+                currentButton.textContent = "Add to Inventory";
+                currentButton.disabled = false;
+                currentButton.classList.remove("added");
+            }
+            const currentResults = document.getElementById("foraging-results");
+            if (currentResults) saveForagingResults(currentResults.innerHTML, window.latestForagingResults || []);
+        }
+    });
+
     const resultsDiv = document.getElementById("foraging-results");
     if (resultsDiv) saveForagingResults(resultsDiv.innerHTML, window.latestForagingResults || []);
 }

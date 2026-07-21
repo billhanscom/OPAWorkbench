@@ -1,4 +1,4 @@
-/* OPA Workbench: Phase 1 inventory screen */
+/* OPA Workbench: quantity-based inventory screen */
 
 (() => {
     "use strict";
@@ -6,6 +6,7 @@
     let ingredients = [];
     let potionNames = null;
     let showAllIngredients = false;
+    let showAllPotions = false;
 
     const rarityOrder = ["common", "uncommon", "rare"];
     const potionTypes = ["combat", "utility", "whimsy"];
@@ -52,9 +53,11 @@
         return controls;
     }
 
-    function createInventoryRow(name, quantity, handlers, extraClass = "") {
+    function createInventoryRow(name, quantity, handlers, extraClass = "", emphasizeOwned = false) {
         const row = document.createElement("div");
-        row.className = `inventory-compact-row${quantity > 0 ? " is-owned" : ""}${extraClass ? ` ${extraClass}` : ""}`;
+        const ownedClass = quantity > 0 ? " is-owned" : "";
+        const emphasisClass = emphasizeOwned && quantity > 0 ? " emphasize-owned" : "";
+        row.className = `inventory-compact-row${ownedClass}${emphasisClass}${extraClass ? ` ${extraClass}` : ""}`;
 
         const itemName = document.createElement("span");
         itemName.className = "inventory-compact-name";
@@ -86,11 +89,11 @@
             delete quantities[name];
         }
 
+        const nextInventory = Array.from(set);
         Obojima.saveInventoryQuantities(quantities);
-        Obojima.saveStoredInventory(Array.from(set));
-        Obojima.updateSaveInventoryButtons(Array.from(set));
+        Obojima.saveStoredInventory(nextInventory);
+        Obojima.updateSaveInventoryButtons(nextInventory);
         renderIngredients();
-        updateTotals();
     }
 
     function renderIngredients() {
@@ -117,7 +120,8 @@
                             onDecrease: () => setIngredientQuantity(ingredient.name, quantity - 1),
                             onIncrease: () => setIngredientQuantity(ingredient.name, quantity + 1)
                         },
-                        `rarity-${rarity}`
+                        `rarity-${rarity}`,
+                        showAllIngredients
                     ));
                 });
 
@@ -148,42 +152,35 @@
             Object.keys(names)
                 .map(Number)
                 .sort((a, b) => a - b)
+                .filter(number => showAllPotions || Number(inventory[potionKey(type, number)] || 0) > 0)
                 .forEach(number => {
                     const key = potionKey(type, number);
-                    const quantity = inventory[key] || 0;
+                    const quantity = Math.max(0, Number(inventory[key]) || 0);
                     const label = `${number}. ${names[number]}`;
                     target.appendChild(createInventoryRow(label, quantity, {
                         onDecrease: () => {
                             Obojima.setPotionQuantity(key, quantity - 1);
                             renderPotions();
-                            updateTotals();
                         },
                         onIncrease: () => {
                             Obojima.setPotionQuantity(key, quantity + 1);
                             renderPotions();
-                            updateTotals();
                         }
-                    }, `potion-${type}`));
+                    }, `potion-${type}`, showAllPotions));
                 });
+
+            if (!target.children.length) {
+                const empty = document.createElement("p");
+                empty.className = "inventory-category-empty";
+                empty.textContent = showAllPotions ? "No potions in this category." : "None currently owned.";
+                target.appendChild(empty);
+            }
         });
-    }
-
-    function updateTotals() {
-        const ingredientQuantities = Obojima.loadInventoryQuantities();
-        const potionQuantities = Obojima.loadPotionInventory();
-        const ingredientKinds = Object.values(ingredientQuantities).filter(value => Number(value) > 0).length;
-        const ingredientCount = Object.values(ingredientQuantities).reduce((sum, value) => sum + Math.max(0, Number(value) || 0), 0);
-        const potionKinds = Object.values(potionQuantities).filter(value => Number(value) > 0).length;
-        const potionCount = Object.values(potionQuantities).reduce((sum, value) => sum + Math.max(0, Number(value) || 0), 0);
-
-        document.getElementById("ingredient-total").textContent = `${ingredientCount} ingredient${ingredientCount === 1 ? "" : "s"} across ${ingredientKinds} type${ingredientKinds === 1 ? "" : "s"}`;
-        document.getElementById("potion-total").textContent = `${potionCount} potion${potionCount === 1 ? "" : "s"} across ${potionKinds} type${potionKinds === 1 ? "" : "s"}`;
     }
 
     function rerender() {
         renderPotions();
         renderIngredients();
-        updateTotals();
         Obojima.updateInventoryProfileDisplay();
         Obojima.updateSaveInventoryButtons(ingredientInventory());
     }
@@ -212,10 +209,17 @@
                 Obojima.loadIngredientData(Obojima.getValuesYear()),
                 Obojima.loadPotionNames()
             ]);
+
+            document.getElementById("show-all-potions").addEventListener("change", event => {
+                showAllPotions = event.currentTarget.checked;
+                renderPotions();
+            });
+
             document.getElementById("show-all-ingredients").addEventListener("change", event => {
                 showAllIngredients = event.currentTarget.checked;
                 renderIngredients();
             });
+
             rerender();
         } catch (error) {
             console.error("Unable to initialize the inventory workbench.", error);

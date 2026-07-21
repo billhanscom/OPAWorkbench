@@ -1,0 +1,235 @@
+/* Optional First Age terminal display. Loaded after the standard theme. */
+html.first-age-display,
+body.first-age-display {
+    background: #050301;
+}
+
+body.first-age-display {
+    --terminal-amber: #f4a12a;
+    --terminal-amber-soft: #d9871d;
+    --terminal-bg: #0d0803;
+    --terminal-panel: #130c05;
+    --terminal-line: rgba(244, 161, 42, 0.72);
+    --body-font: "Courier New", Courier, monospace;
+    color: var(--terminal-amber);
+    background-color: var(--terminal-bg);
+    background-image: radial-gradient(circle at center, rgba(244, 161, 42, 0.04), transparent 70%);
+}
+
+body.first-age-display::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    background: url("../images/scanlines.png") repeat;
+    opacity: 0.13;
+    mix-blend-mode: screen;
+}
+
+body.first-age-display .container {
+    background: var(--terminal-panel);
+    color: var(--terminal-amber);
+    border: 1px solid var(--terminal-line);
+    border-radius: 0;
+    box-shadow: 0 0 24px rgba(244, 161, 42, 0.18), inset 0 0 28px rgba(244, 161, 42, 0.04);
+}
+
+body.first-age-display h1,
+body.first-age-display h2,
+body.first-age-display h3,
+body.first-age-display h4,
+body.first-age-display h5,
+body.first-age-display .tool-description,
+body.first-age-display .site-footer,
+body.first-age-display .inventory-profile,
+body.first-age-display .utility-heading {
+    color: var(--terminal-amber);
+    font-family: var(--body-font);
+    text-shadow: 0 0 7px rgba(244, 161, 42, 0.45);
+}
+
+body.first-age-display h1 {
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+body.first-age-display a,
+body.first-age-display .utility-link,
+body.first-age-display .toolkit-nav-link {
+    color: var(--terminal-amber);
+}
+
+body.first-age-display .utility-link.active,
+body.first-age-display .toolkit-nav-link.active,
+body.first-age-display .value-choice.active,
+body.first-age-display .hc-toggle-link.active,
+body.first-age-display .display-choice.active {
+    border-bottom-color: var(--terminal-amber);
+    color: #ffd28a;
+}
+
+body.first-age-display button,
+body.first-age-display input,
+body.first-age-display select,
+body.first-age-display textarea,
+body.first-age-display .ingredient-button,
+body.first-age-display .recipe-card,
+body.first-age-display .completion-card,
+body.first-age-display .foraging-results-panel,
+body.first-age-display .inventory-section,
+body.first-age-display .inventory-row,
+body.first-age-display .adjust-quantity-modal {
+    font-family: var(--body-font);
+    color: var(--terminal-amber);
+    background: #0b0703;
+    border-color: var(--terminal-line);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+body.first-age-display button,
+body.first-age-display .primary-action-button,
+body.first-age-display .brew-recipe-button,
+body.first-age-display .inventory-quantity-button {
+    background: transparent;
+    color: var(--terminal-amber);
+    border: 1px solid var(--terminal-line);
+    border-radius: 0;
+    text-shadow: 0 0 6px rgba(244, 161, 42, 0.35);
+}
+
+body.first-age-display button:hover,
+body.first-age-display button:focus-visible,
+body.first-age-display .primary-action-button:hover,
+body.first-age-display .brew-recipe-button:hover {
+    background: var(--terminal-amber);
+    color: #140a00;
+    outline-color: #ffd28a;
+}
+
+body.first-age-display .ingredient-button.selected,
+body.first-age-display .ingredient-button.selected.common,
+body.first-age-display .ingredient-button.selected.uncommon,
+body.first-age-display .ingredient-button.selected.rare,
+body.first-age-display .ingredient.common,
+body.first-age-display .ingredient.uncommon,
+body.first-age-display .ingredient.rare {
+    background: rgba(244, 161, 42, 0.18);
+    color: #ffd28a;
+    border: 1px solid var(--terminal-line);
+}
+
+body.first-age-display h3,
+body.first-age-display .recipe-summary,
+body.first-age-display .completion-region-footer,
+body.first-age-display .site-footer,
+body.first-age-display .inventory-section-header {
+    border-color: var(--terminal-line);
+}
+
+body.first-age-display .inventory-undo-banner {
+    background: #0b0703;
+    color: var(--terminal-amber);
+    border-color: var(--terminal-line);
+    box-shadow: 0 0 18px rgba(244, 161, 42, 0.2);
+}
+
+body.first-age-display .inventory-undo-banner-button,
+body.first-age-display .adjust-quantity-remove-all {
+    color: #ffd28a;
+}
+
+.display-control {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.display-choice {
+    white-space: nowrap;
+}
+
+.first-age-boot {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow: hidden;
+    background: #050301;
+    color: #f4a12a;
+    font-family: "Courier New", Courier, monospace;
+    text-shadow: 0 0 8px rgba(244, 161, 42, 0.7);
+    opacity: 1;
+    transition: opacity 220ms ease;
+}
+
+.first-age-boot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: url("../images/scanlines.png") repeat;
+    opacity: 0.22;
+}
+
+.first-age-boot.is-closing {
+    opacity: 0;
+}
+
+.first-age-boot-panel {
+    position: relative;
+    z-index: 1;
+    width: min(92vw, 760px);
+    border: 1px solid rgba(244, 161, 42, 0.7);
+    padding: clamp(18px, 4vw, 34px);
+    background: rgba(8, 5, 2, 0.88);
+    box-shadow: 0 0 28px rgba(244, 161, 42, 0.18), inset 0 0 24px rgba(244, 161, 42, 0.04);
+}
+
+.first-age-boot-output {
+    min-height: 12em;
+    margin: 0 0 20px;
+    white-space: pre-wrap;
+    font: inherit;
+    font-size: clamp(13px, 2.4vw, 18px);
+    line-height: 1.55;
+}
+
+.first-age-boot-skip {
+    float: right;
+    border: 1px solid #f4a12a;
+    border-radius: 0;
+    background: transparent;
+    color: #f4a12a;
+    padding: 6px 12px;
+    font: inherit;
+    cursor: pointer;
+}
+
+.first-age-boot-skip:hover,
+.first-age-boot-skip:focus-visible {
+    background: #f4a12a;
+    color: #140a00;
+}
+
+@media (max-width: 640px) {
+    .display-control {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .display-control .utility-heading {
+        flex-basis: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .first-age-boot,
+    .first-age-boot.is-closing {
+        transition: none;
+    }
+}

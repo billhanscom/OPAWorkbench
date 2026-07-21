@@ -139,13 +139,6 @@ const Obojima = (() => {
         undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
     }
 
-    document.addEventListener("keydown", event => {
-        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
-        if (!isUndo || !activeUndoAction) return;
-        event.preventDefault();
-        runActiveUndo();
-    });
-
     return {
             ...ingredient,
             combat: Number(selectedValues.combat || 0),
@@ -240,13 +233,6 @@ const Obojima = (() => {
 
         undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
     }
-
-    document.addEventListener("keydown", event => {
-        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
-        if (!isUndo || !activeUndoAction) return;
-        event.preventDefault();
-        runActiveUndo();
-    });
 
     return {
             common: ingredients.filter(ing => normalizeRarity(ing.rarity) === "common").sort((a, b) => ingredientSortKey(a).localeCompare(ingredientSortKey(b))),
@@ -383,13 +369,6 @@ const Obojima = (() => {
 
         undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
     }
-
-    document.addEventListener("keydown", event => {
-        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
-        if (!isUndo || !activeUndoAction) return;
-        event.preventDefault();
-        runActiveUndo();
-    });
 
     return {
             name: ing.name,
@@ -549,27 +528,129 @@ const Obojima = (() => {
         });
     }
 
+    function showAdjustIngredientQuantityDialog(ingredient, currentQuantity) {
+        return new Promise(resolve => {
+            let pendingQuantity = Math.max(1, Math.floor(Number(currentQuantity) || 1));
+
+            const backdrop = document.createElement("div");
+            backdrop.className = "inventory-modal-backdrop";
+            backdrop.setAttribute("role", "dialog");
+            backdrop.setAttribute("aria-modal", "true");
+            backdrop.setAttribute("aria-labelledby", "adjust-ingredient-title");
+
+            const modal = document.createElement("div");
+            modal.className = "inventory-modal adjust-quantity-modal";
+
+            const heading = document.createElement("h3");
+            heading.id = "adjust-ingredient-title";
+            heading.textContent = ingredient;
+
+            const quantityLabel = document.createElement("p");
+            quantityLabel.className = "adjust-quantity-label";
+            quantityLabel.textContent = "Quantity";
+
+            const controls = document.createElement("div");
+            controls.className = "adjust-quantity-controls";
+
+            const minus = document.createElement("button");
+            minus.type = "button";
+            minus.className = "inventory-quantity-button";
+            minus.textContent = "−";
+            minus.setAttribute("aria-label", `Decrease ${ingredient} quantity`);
+
+            const count = document.createElement("span");
+            count.className = "inventory-quantity-count";
+            count.textContent = String(pendingQuantity);
+            count.setAttribute("aria-live", "polite");
+
+            const plus = document.createElement("button");
+            plus.type = "button";
+            plus.className = "inventory-quantity-button";
+            plus.textContent = "+";
+            plus.setAttribute("aria-label", `Increase ${ingredient} quantity`);
+
+            const refreshCount = () => {
+                count.textContent = String(pendingQuantity);
+                minus.disabled = pendingQuantity <= 1;
+            };
+
+            minus.addEventListener("click", () => {
+                pendingQuantity = Math.max(1, pendingQuantity - 1);
+                refreshCount();
+            });
+            plus.addEventListener("click", () => {
+                pendingQuantity += 1;
+                refreshCount();
+            });
+
+            controls.append(minus, count, plus);
+
+            const removeAll = document.createElement("button");
+            removeAll.type = "button";
+            removeAll.className = "adjust-quantity-remove-all";
+            removeAll.textContent = "Remove All";
+            removeAll.addEventListener("click", () => {
+                closeInventoryModal(backdrop);
+                resolve({ action: "remove", quantity: 0 });
+            });
+
+            const actions = document.createElement("div");
+            actions.className = "inventory-modal-actions";
+
+            const apply = document.createElement("button");
+            apply.type = "button";
+            apply.className = "modal-primary";
+            apply.textContent = "Apply";
+            apply.addEventListener("click", () => {
+                closeInventoryModal(backdrop);
+                resolve({ action: "apply", quantity: pendingQuantity });
+            });
+
+            const cancel = document.createElement("button");
+            cancel.type = "button";
+            cancel.className = "modal-secondary";
+            cancel.textContent = "Cancel";
+            cancel.addEventListener("click", () => {
+                closeInventoryModal(backdrop);
+                resolve({ action: "cancel", quantity: currentQuantity });
+            });
+
+            actions.append(apply, cancel);
+            modal.append(heading, quantityLabel, controls, removeAll, actions);
+            backdrop.appendChild(modal);
+            document.body.appendChild(backdrop);
+            refreshCount();
+            minus.focus();
+
+            modal.addEventListener("keydown", event => {
+                if (event.key === "Escape") {
+                    closeInventoryModal(backdrop);
+                    resolve({ action: "cancel", quantity: currentQuantity });
+                }
+            });
+        });
+    }
+
     function bindIngredientButtons(getInventory, setInventory, onChange) {
         document.querySelectorAll(".ingredient-button").forEach(button => {
-            button.addEventListener("click", () => {
+            button.addEventListener("click", async () => {
                 const ingredient = button.getAttribute("data-ingredient");
                 const current = normalizeInventoryList(getInventory());
-                const quantities = reconcileInventoryQuantities(current);
-                const next = current.includes(ingredient)
-                    ? current.filter(item => item !== ingredient)
-                    : current.concat([ingredient]);
 
-                if (current.includes(ingredient)) {
-                    delete quantities[ingredient];
-                    saveInventoryQuantities(quantities);
-                } else if (!quantities[ingredient]) {
-                    quantities[ingredient] = 1;
-                    saveInventoryQuantities(quantities);
+                if (!current.includes(ingredient)) {
+                    setInventoryQuantity(ingredient, 1, getInventory, setInventory, onChange);
+                    applyInventoryToButtons(normalizeInventoryList(getInventory()));
+                    return;
                 }
 
-                setInventory(normalizeInventoryList(next));
-                applyInventoryToButtons(next);
-                if (typeof onChange === "function") onChange();
+                const result = await showAdjustIngredientQuantityDialog(
+                    ingredient,
+                    getInventoryQuantity(ingredient)
+                );
+
+                if (result.action === "cancel") return;
+                setInventoryQuantity(ingredient, result.quantity, getInventory, setInventory, onChange);
+                applyInventoryToButtons(normalizeInventoryList(getInventory()));
             });
         });
     }
@@ -789,13 +870,6 @@ const Obojima = (() => {
         undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
     }
 
-    document.addEventListener("keydown", event => {
-        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
-        if (!isUndo || !activeUndoAction) return;
-        event.preventDefault();
-        runActiveUndo();
-    });
-
     return {
             playerName: localStorage.getItem(OBOJIMA_PLAYER_NAME_KEY) || "",
             characterName: localStorage.getItem(OBOJIMA_CHARACTER_NAME_KEY) || ""
@@ -879,13 +953,6 @@ const Obojima = (() => {
 
         undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
     }
-
-    document.addEventListener("keydown", event => {
-        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
-        if (!isUndo || !activeUndoAction) return;
-        event.preventDefault();
-        runActiveUndo();
-    });
 
     return {
             version: 2,
@@ -1138,13 +1205,6 @@ const Obojima = (() => {
         undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
     }
 
-    document.addEventListener("keydown", event => {
-        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
-        if (!isUndo || !activeUndoAction) return;
-        event.preventDefault();
-        runActiveUndo();
-    });
-
     return {
             app: "Obojima Potion Toolkit",
             version: 2,
@@ -1279,13 +1339,6 @@ const Obojima = (() => {
         undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
     }
 
-    document.addEventListener("keydown", event => {
-        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
-        if (!isUndo || !activeUndoAction) return;
-        event.preventDefault();
-        runActiveUndo();
-    });
-
     return {
             playerName: parsed && !Array.isArray(parsed) ? (parsed.playerName || "") : "",
             characterName: parsed && !Array.isArray(parsed) ? (parsed.characterName || "") : "",
@@ -1418,13 +1471,6 @@ const Obojima = (() => {
 
         undoBannerTimer = window.setTimeout(dismissUndoBanner, Math.max(1000, Number(duration) || 10000));
     }
-
-    document.addEventListener("keydown", event => {
-        const isUndo = (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey && event.code === "KeyZ";
-        if (!isUndo || !activeUndoAction) return;
-        event.preventDefault();
-        runActiveUndo();
-    });
 
     return {
         REGION_LIST: DEFAULT_REGION_LIST,

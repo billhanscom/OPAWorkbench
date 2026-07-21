@@ -543,7 +543,11 @@ const Obojima = (() => {
 
             const heading = document.createElement("h3");
             heading.id = "adjust-ingredient-title";
-            heading.textContent = ingredient;
+            heading.textContent = "Adjust Quantity";
+
+            const ingredientName = document.createElement("p");
+            ingredientName.className = "adjust-quantity-ingredient-name";
+            ingredientName.textContent = ingredient;
 
             const quantityLabel = document.createElement("p");
             quantityLabel.className = "adjust-quantity-label";
@@ -616,7 +620,7 @@ const Obojima = (() => {
             });
 
             actions.append(apply, cancel);
-            modal.append(heading, quantityLabel, controls, removeAll, actions);
+            modal.append(heading, ingredientName, quantityLabel, controls, removeAll, actions);
             backdrop.appendChild(modal);
             document.body.appendChild(backdrop);
             refreshCount();
@@ -624,8 +628,8 @@ const Obojima = (() => {
 
             modal.addEventListener("keydown", event => {
                 if (event.key === "Escape") {
-                    closeInventoryModal(backdrop);
-                    resolve({ action: "cancel", quantity: currentQuantity });
+                    event.preventDefault();
+                    cancel.click();
                 }
             });
         });
@@ -649,8 +653,18 @@ const Obojima = (() => {
                 );
 
                 if (result.action === "cancel") return;
+
+                const previousQuantity = getInventoryQuantity(ingredient);
                 setInventoryQuantity(ingredient, result.quantity, getInventory, setInventory, onChange);
                 applyInventoryToButtons(normalizeInventoryList(getInventory()));
+
+                showUndoBanner({
+                    message: `${ingredient} quantity adjusted.`,
+                    undo: () => {
+                        setInventoryQuantity(ingredient, previousQuantity, getInventory, setInventory, onChange);
+                        applyInventoryToButtons(normalizeInventoryList(getInventory()));
+                    }
+                });
             });
         });
     }

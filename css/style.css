@@ -4330,3 +4330,56 @@ body.high-contrast .inventory-undo-banner-content {
 .adjust-quantity-remove-all:focus-visible {
     color: #6f241d;
 }
+
+
+/* Workbench 0.10.3: recipe spacing and quantity-dialog refinements */
+.recipe-subcard ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.recipe-subcard .ingredient {
+    margin: 0 !important;
+}
+
+.adjust-quantity-modal {
+    max-width: 360px;
+}
+
+.adjust-quantity-modal h3 {
+    margin: 0 0 10px;
+}
+
+.adjust-quantity-ingredient-name {
+    margin: 0 0 18px;
+    color: #577da1;
+    font-size: 18px;
+    line-height: 1.25;
+}
+
+.adjust-quantity-modal .inventory-quantity-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    width: 32px;
+    min-width: 32px;
+    height: 34px;
+    padding: 0 !important;
+    border: 1px solid #111111;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #111111;
+    line-height: 1;
+}
+
+.adjust-quantity-modal .inventory-quantity-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.adjust-quantity-controls {
+    display: inline-grid;
+    grid-template-columns: 32px 38px 32px;
+    gap: 4px;
+    margin-bottom: 18px;
+}

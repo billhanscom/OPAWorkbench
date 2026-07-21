@@ -4499,3 +4499,174 @@ body.high-contrast .inventory-undo-banner-content {
     background: #c68f40;
     color: #ffffff;
 }
+
+/* ==========================================================
+   OPA Workbench 0.10.8 — intentional mobile header layout
+   ========================================================== */
+@media (max-width: 640px) {
+    .container {
+        width: calc(100% - 20px) !important;
+        margin: 10px auto !important;
+        padding: 18px 14px 28px !important;
+        border-radius: 12px !important;
+    }
+
+    .app-header {
+        margin-bottom: 0 !important;
+    }
+
+    /* A true mobile utility area: inventory first, preferences second. */
+    .app-utility-bar.developer-utility-bar {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 12px !important;
+        margin: 0 0 32px !important;
+        text-align: left !important;
+    }
+
+    .app-utility-bar.developer-utility-bar .inventory-strip,
+    .app-utility-bar.developer-utility-bar .preference-strip,
+    .app-utility-bar.developer-utility-bar .developer-mode-badge {
+        grid-column: 1 !important;
+        justify-self: stretch !important;
+        width: 100% !important;
+    }
+
+    .app-utility-bar.developer-utility-bar .inventory-strip {
+        grid-row: 1 !important;
+    }
+
+    .inventory-strip .utility-line {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: baseline !important;
+        gap: 7px 14px !important;
+        min-height: 0 !important;
+    }
+
+    .inventory-strip .current-inventory-line {
+        display: grid !important;
+        grid-template-columns: auto minmax(0, 1fr) !important;
+        align-items: baseline !important;
+        gap: 8px !important;
+        margin-top: 8px !important;
+        min-height: 0 !important;
+    }
+
+    .utility-heading,
+    .utility-link,
+    a.utility-link,
+    button.utility-link,
+    .inventory-profile {
+        font-size: 14px !important;
+        line-height: 1.25 !important;
+    }
+
+    .app-utility-bar.developer-utility-bar .preference-strip {
+        grid-row: 3 !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        align-items: start !important;
+        gap: 12px !important;
+        margin: 0 !important;
+        padding-top: 10px !important;
+        border-top: 1px solid rgba(0, 0, 0, .18) !important;
+        text-align: left !important;
+    }
+
+    .preference-strip .values-control,
+    .preference-strip .contrast-control {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-start !important;
+        align-items: baseline !important;
+        gap: 6px 12px !important;
+        margin: 0 !important;
+        min-height: 0 !important;
+    }
+
+    .preference-strip .utility-heading,
+    .preference-strip .contrast-icon {
+        flex-basis: 100% !important;
+    }
+
+    .app-utility-bar.developer-utility-bar .developer-mode-badge {
+        grid-row: 2 !important;
+        justify-self: center !important;
+        width: fit-content !important;
+        margin: 0 auto !important;
+    }
+
+    /* Keep the product title prominent without overwhelming the phone. */
+    h1 {
+        max-width: 330px !important;
+        margin: 0 auto 20px !important;
+        font-size: 30px !important;
+        line-height: 1.08 !important;
+        text-wrap: balance;
+    }
+
+    /* Each tool gets its own deliberate row rather than accidental wrapping. */
+    .toolkit-nav {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        gap: 2px !important;
+        min-height: 0 !important;
+        margin: 0 auto 18px !important;
+    }
+
+    .toolkit-nav-link {
+        width: fit-content !important;
+        padding: 5px 0 4px !important;
+        font-size: 17px !important;
+        line-height: 1.05 !important;
+    }
+
+    .tool-description {
+        max-width: 330px !important;
+        margin-bottom: 22px !important;
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+        text-wrap: balance;
+    }
+
+    /* Preserve comfortable touch targets while avoiding an oversized row. */
+    .primary-action-wrap {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        margin-bottom: 28px !important;
+    }
+
+    .primary-action-button,
+    button.primary-action-button {
+        width: 100% !important;
+        min-height: 46px !important;
+        padding: 9px 10px !important;
+    }
+
+    .foraging-controls {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 18px !important;
+    }
+
+    .foraging-controls .control-group,
+    .foraging-controls select,
+    .foraging-controls input {
+        width: 100% !important;
+        max-width: none !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .primary-action-wrap {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .app-utility-bar.developer-utility-bar .preference-strip {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+}

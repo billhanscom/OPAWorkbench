@@ -622,12 +622,23 @@ const Obojima = (() => {
             refreshCount();
             minus.focus();
 
-            modal.addEventListener("keydown", event => {
-                if (event.key === "Escape") {
-                    event.preventDefault();
-                    cancel.click();
-                }
-            });
+            const handleEscape = event => {
+                if (event.key !== "Escape") return;
+                event.preventDefault();
+                event.stopPropagation();
+                document.removeEventListener("keydown", handleEscape, true);
+                cancel.click();
+            };
+
+            document.addEventListener("keydown", handleEscape, true);
+
+            const removeEscapeHandler = () => {
+                document.removeEventListener("keydown", handleEscape, true);
+            };
+
+            apply.addEventListener("click", removeEscapeHandler, { once: true });
+            cancel.addEventListener("click", removeEscapeHandler, { once: true });
+            removeAll.addEventListener("click", removeEscapeHandler, { once: true });
         });
     }
 

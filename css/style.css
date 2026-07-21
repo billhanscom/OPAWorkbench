@@ -4416,3 +4416,26 @@ body.high-contrast .inventory-undo-banner-content {
     width: max-content;
     margin: 0 auto 22px;
 }
+
+
+/* Workbench 0.10.5: quantity-heading, Escape handling, and stable banner links */
+.adjust-quantity-modal h3 {
+    color: #111111;
+    font-family: var(--body-font);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.35;
+}
+
+.inventory-undo-banner-button {
+    border-bottom: 0;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.inventory-undo-banner-button:hover,
+.inventory-undo-banner-button:focus-visible {
+    border-bottom: 0;
+    text-decoration-thickness: 2px;
+}
